@@ -19,14 +19,15 @@ Suggested sizes: around 2400px on the long edge, JPEG quality ~80, ideally under
 
 Currently expected:
 
-- **foxes/images/**: `01–03.jpg` the three etchings, `04.jpg` Nodes installation view. Slide 5 embeds the live piece from foxes.pkwr.co.
-- **concrete/images/**: `01.jpg` projection, `02.jpg` installation view, `03.jpg` camera in the drum, `04.jpg` projection detail, `concrete.mp4` a short muted loop (optional, delete that slide if not using).
+- **foxes/images/**: `01–03.jpg` the three etchings (shown whole, not cropped), `04.jpg` Nodes installation view. Slide 5 embeds the live piece from foxes.pkwr.co.
+- **concrete/images/**: done, `01–15.jpg` (festival photos by Andy Brown, then install shots).
 
 ## Slide options
 
 ```json
-{ "src": "images/01.jpg", "alt": "...", "caption": "..." }                  image, letterboxed
-{ "src": "images/01.jpg", "alt": "...", "caption": "...", "fit": "cover" }  image, fills the frame
+{ "src": "images/01.jpg", "alt": "...", "caption": "..." }                    image, fills the frame (cropped)
+{ "src": "images/01.jpg", "alt": "...", "caption": "...", "fit": "contain" }  image, shown whole (good for portraits)
+{ "src": "images/01.jpg", "alt": "...", "position": "center top" }            choose which part stays in view when cropped
 { "type": "video", "src": "images/clip.mp4", "poster": "images/01.jpg" }     muted looping video
 { "type": "embed", "src": "https://foxes.pkwr.co", "caption": "..." }       live web piece in a frame
 ```
