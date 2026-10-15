@@ -4,8 +4,8 @@ Simple GitHub Pages site: one page per project, full-screen slideshow on the lef
 
 ```
 index.html            project list
-assets/style.css      shared design
-assets/slideshow.js   shared slideshow
+assets/site.css      shared design
+assets/site.js   shared slideshow
 foxes/                index.html + images/
 concrete/             index.html + images/
 _template/            copy this to start a new project

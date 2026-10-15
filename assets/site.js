@@ -127,37 +127,90 @@
       el("h1", {}, data.title),
       data.subtitle ? el("p", { class: "subtitle" }, data.subtitle) : ""));
 
+    // ---------- Sections ----------
+    // Pages can list "sections" explicitly; otherwise they're built from the older keys.
+    const sections = data.sections || [
+      data.menu && data.menu.length ? { id: "projects", title: "Projects", menu: data.menu } : null,
+      data.summary ? { id: "summary", title: data.summaryTitle || "Summary", text: data.summary } : null,
+      data.details ? { id: "details", title: "Details", details: data.details } : null,
+      data.links && data.links.length ? { id: "links", title: data.linksTitle || "Links", links: data.links } : null,
+      data.related && data.related.length ? { id: "related", title: "Related", related: data.related } : null
+    ].filter(Boolean);
+
     let menuLinks = [];
-    if (data.menu && data.menu.length) {
-      const ul = el("ul");
-      data.menu.forEach(m => {
-        const a = el("a", { href: m.href }, el("span", { class: "menu-label" }, m.label), m.meta ? el("span", { class: "menu-meta" }, m.meta) : "");
-        a.dataset.project = m.href;
-        menuLinks.push(a);
-        ul.append(el("li", {}, a));
+    const subnavLinks = [];
+    const subnav = el("nav", { class: "subnav", "aria-label": "Sections" });
+    const subnavList = el("ul");
+    subnav.append(subnavList);
+    if (sections.length > 1) panel.append(subnav);
+
+    const sectionEls = sections.map((s, i) => {
+      const id = "sec-" + (s.id || slug(s.title) || i);
+      const sec = el("section", { class: "sec", id });
+      if (s.title) sec.append(el("h2", {}, s.title));
+      if (s.text) [].concat(s.text).forEach(t => sec.append(el("p", {}, t)));
+      if (s.list) {
+        const ul = el("ul", { class: "plain" });
+        s.list.forEach(t => ul.append(el("li", {}, t)));
+        sec.append(ul);
+      }
+      if (s.details) {
+        const dl = el("dl", { class: "meta" });
+        s.details.forEach(([k, v]) => dl.append(el("dt", {}, k), el("dd", {}, v)));
+        sec.append(dl);
+      }
+      if (s.menu) {
+        sec.classList.add("menu");
+        const ul = el("ul");
+        s.menu.forEach(m => {
+          const a = el("a", { href: m.href }, el("span", { class: "menu-label" }, m.label), m.meta ? el("span", { class: "menu-meta" }, m.meta) : "");
+          a.dataset.project = m.href;
+          menuLinks.push(a);
+          ul.append(el("li", {}, a));
+        });
+        sec.append(ul);
+      }
+      if (s.links) {
+        sec.classList.add("links");
+        const ul = el("ul");
+        s.links.forEach(l => ul.append(el("li", {}, el("a", { href: l.href, target: l.href.startsWith("mailto:") ? "_self" : "_blank", rel: "noopener" }, l.label))));
+        sec.append(ul);
+      }
+      if (s.related) {
+        sec.classList.add("related");
+        const ul = el("ul");
+        s.related.forEach(l => ul.append(el("li", {}, el("a", { href: l.href }, l.label))));
+        sec.append(ul);
+      }
+      panel.append(sec);
+      const a = el("a", { href: "#" + id }, s.navTitle || s.title || "");
+      a.addEventListener("click", e => {
+        e.preventDefault();
+        sec.style.scrollMarginTop = (subnav.offsetHeight + 16) + "px";   // clear the sticky sub-nav
+        // keep the clicked section highlighted while the scroll settles
+        lockUntil = Date.now() + 1200;
+        subnavLinks.forEach(x => x.classList.toggle("is-active", x === a));
+        sec.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
       });
-      panel.append(el("nav", { class: "menu", "aria-label": "Projects" }, el("h2", {}, "Projects"), ul));
+      subnavLinks.push(a);
+      subnavList.append(el("li", {}, a));
+      return sec;
+    });
+
+    // highlight the section currently in view
+    let lockUntil = 0;
+    function markSection() {
+      if (sectionEls.length < 2 || Date.now() < lockUntil) return;
+      const scroller = panel.scrollHeight > panel.clientHeight + 2 ? panel : document.scrollingElement;
+      const navBottom = subnav.getBoundingClientRect().bottom + 28;
+      let active = 0;
+      sectionEls.forEach((s, i) => { if (s.getBoundingClientRect().top <= navBottom) active = i; });
+      if (scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 4) active = sectionEls.length - 1;
+      subnavLinks.forEach((a, i) => a.classList.toggle("is-active", i === active));
     }
-    if (data.summary) {
-      const sum = el("div", { class: "summary" });
-      [].concat(data.summary).forEach(p => sum.append(el("p", {}, p)));
-      panel.append(sum);
-    }
-    if (data.details) {
-      const dl = el("dl", { class: "meta" });
-      data.details.forEach(([k, v]) => dl.append(el("dt", {}, k), el("dd", {}, v)));
-      panel.append(dl);
-    }
-    if (data.links && data.links.length) {
-      const ul = el("ul");
-      data.links.forEach(l => ul.append(el("li", {}, el("a", { href: l.href, target: l.href.startsWith("mailto:") ? "_self" : "_blank", rel: "noopener" }, l.label))));
-      panel.append(el("section", { class: "links" }, el("h2", {}, data.linksTitle || "Links"), ul));
-    }
-    if (data.related && data.related.length) {
-      const ul = el("ul");
-      data.related.forEach(l => ul.append(el("li", {}, el("a", { href: l.href }, l.label))));
-      panel.append(el("section", { class: "related" }, el("h2", {}, "Related"), ul));
-    }
+    panel.addEventListener("scroll", markSection, { passive: true });
+    window.addEventListener("scroll", markSection, { passive: true });
+    window.addEventListener("resize", markSection);
     panel.append(el("footer", {},
       data.home ? el("span", {}, "© " + new Date().getFullYear()) : el("a", { href: "../" }, "← All projects"),
       el("span", {}, data.credit || "Patrick Walker")));
@@ -165,6 +218,7 @@
     drawer.append(strip, panel);
     root.append(stage, drawer);
     root.classList.add("panel-hidden");
+    requestAnimationFrame(markSection);
 
     // ---------- Behaviour ----------
     let current = 0, timer = null, playing = AUTOPLAY_MS > 0 && data.slides.length > 1;
@@ -339,6 +393,7 @@
     return n;
   }
   function pad(n) { return String(n).padStart(2, "0"); }
+  function slug(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
   function missing(s) {
     return el("div", { class: "slide-missing" }, el("strong", {}, "Image not found"), s.src, el("br"), s.alt || "");
   }
