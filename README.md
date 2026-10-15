@@ -34,7 +34,7 @@ Currently expected:
 
 The slideshow auto-advances every 2 seconds on image slides and stops on video/embed slides. Set `"autoplay": false` (or a number of milliseconds) at the top of a page's data block to change that.
 
-Info: hover the strip on the right edge to peek, click to keep it open. Keys: ← → to move, `i` toggles the panel, Esc closes it, `f` full screen, space pauses.
+Info: hover the strip on the right edge to peek, click to keep it open. Over the image: click the outer numbers (e.g. 15 · 01 · 02) to go back or forward; the controls fade after 2.5s without activity. Keys: ← → to move, `i` toggles the panel, Esc closes it, `f` full screen, space pauses.
 
 ## Adding a project
 

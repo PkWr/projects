@@ -171,11 +171,11 @@ a { color: inherit; text-underline-offset: 3px; }
 .project.panel-hidden .panel {
   visibility: hidden;
   background: var(--strip);   /* the whole side is yellow while closed, fading to white as it opens */
-  transition: visibility 0s linear 450ms, background-color 300ms ease;
+  transition: visibility 0s linear 720ms, background-color 420ms ease;
 }
 /* keep the controls clear of the open panel */
 .stage-bar { transition: padding-right 450ms var(--slide-ease), opacity 600ms ease; padding-right: calc(var(--panel-w) + var(--strip-w) + 22px); }
-.project.panel-hidden .stage-bar { padding-right: calc(var(--strip-w) + 22px); }
+.project.panel-hidden .stage-bar { padding-right: calc(var(--strip-w) + 22px); transition: padding-right 450ms var(--slide-ease) 260ms, opacity 600ms ease; }
 
 .drawer {
   position: absolute;
@@ -185,7 +185,12 @@ a { color: inherit; text-underline-offset: 3px; }
   transform: translateX(0);
   transition: transform 450ms var(--slide-ease);
 }
-.project.panel-hidden .drawer { transform: translateX(var(--panel-w)); }
+.project.panel-hidden .drawer {
+  transform: translateX(var(--panel-w));
+  /* on close: fade back to yellow first, then slide away */
+  transition: transform 450ms var(--slide-ease) 260ms;
+}
+.project.panel-hidden .strip { transition: background-color 420ms ease; }
 
 /* the strip: always visible, title set sideways */
 .strip {
