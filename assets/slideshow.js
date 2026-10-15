@@ -13,7 +13,7 @@
   if (!dataEl) return;
   const data = JSON.parse(dataEl.textContent);
   const root = document.querySelector(".project");
-  const AUTOPLAY_MS = data.autoplay === false ? 0 : (data.autoplay || 6000);
+  const AUTOPLAY_MS = data.autoplay === false ? 0 : (data.autoplay || 2000);
 
   // ---------- Build stage ----------
   const stage = el("section", { class: "stage", tabindex: "0", "aria-roledescription": "carousel", "aria-label": data.title + " images" });

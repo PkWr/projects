@@ -32,7 +32,7 @@ Currently expected:
 { "type": "embed", "src": "https://foxes.pkwr.co", "caption": "..." }       live web piece in a frame
 ```
 
-The slideshow auto-advances every 6 seconds on image slides and stops on video/embed slides. Set `"autoplay": false` (or a number of milliseconds) at the top of a page's data block to change that.
+The slideshow auto-advances every 2 seconds on image slides and stops on video/embed slides. Set `"autoplay": false` (or a number of milliseconds) at the top of a page's data block to change that.
 
 Keys: ← → to move, `i` hides the details panel, `f` full screen, space pauses.
 

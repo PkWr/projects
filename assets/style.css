@@ -31,6 +31,7 @@
   --stage: #0b0b0b;
   --accent: #111;
   --panel-w: clamp(320px, 28vw, 440px);
+  --strip-w: 44px;
   --gutter: 28px;
   --font: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
   --mono: var(--font);
@@ -68,7 +69,7 @@ a { color: inherit; text-underline-offset: 3px; }
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 600ms ease;
+  transition: opacity 500ms ease;
   pointer-events: none;
   display: flex;
   align-items: center;
@@ -109,7 +110,7 @@ a { color: inherit; text-underline-offset: 3px; }
   background: none;
   border: 0;
 }
-.zone.next { right: 0; cursor: e-resize; }
+.zone.next { right: var(--strip-w); cursor: e-resize; }
 .zone.prev { left: 0; }
 .stage.has-iframe .zone { display: none; } /* let embedded pieces take clicks */
 
@@ -158,23 +159,69 @@ a { color: inherit; text-underline-offset: 3px; }
 
 /* ---------- Panel (slides over the image) ---------- */
 .project.panel-hidden .panel {
-  transform: translateX(100%);
   visibility: hidden;
-  transition: transform 450ms var(--slide-ease), visibility 0s linear 450ms;
+  transition: visibility 0s linear 450ms;
 }
 /* keep the controls clear of the open panel */
-.stage-bar { transition: padding-right 450ms var(--slide-ease); padding-right: calc(var(--panel-w) + 22px); }
-.project.panel-hidden .stage-bar { padding-right: 22px; }
+.stage-bar { transition: padding-right 450ms var(--slide-ease); padding-right: calc(var(--panel-w) + var(--strip-w) + 22px); }
+.project.panel-hidden .stage-bar { padding-right: calc(var(--strip-w) + 22px); }
 
-.panel {
+.drawer {
   position: absolute;
   top: 0; right: 0; bottom: 0;
-  width: var(--panel-w);
   z-index: 5;
-  background: var(--paper);
-  box-shadow: -12px 0 40px rgba(0,0,0,.25);
+  display: flex;
   transform: translateX(0);
-  transition: transform 450ms var(--slide-ease), visibility 0s linear 0s;
+  transition: transform 450ms var(--slide-ease);
+}
+.project.panel-hidden .drawer { transform: translateX(var(--panel-w)); }
+
+/* the strip: always visible, title set sideways */
+.strip {
+  width: var(--strip-w);
+  flex-shrink: 0;
+  margin: 0;
+  padding: 22px 0;
+  border: 0;
+  border-left: 1px solid rgba(0,0,0,.08);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: -10px 0 30px rgba(0,0,0,.22);
+  transition: background 200ms ease;
+}
+.strip:hover { background: #fff; }
+.strip:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
+.strip-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.strip-icon {
+  font-size: 22px;
+  line-height: 1;
+  font-style: normal;
+  transition: transform 300ms var(--slide-ease);
+}
+.project:not(.panel-hidden) .strip-icon { transform: rotate(45deg); }
+/* gentle nudge so the strip reads as interactive */
+@media (prefers-reduced-motion: no-preference) {
+  .project.panel-hidden .strip-icon { animation: nudge 2.4s ease-in-out 1.2s 2; }
+}
+@keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-4px); } }
+
+.panel {
+  width: var(--panel-w);
+  background: var(--paper);
+  transition: visibility 0s linear 0s;
   overflow-y: auto;
   padding: var(--gutter);
   display: flex;
@@ -268,10 +315,10 @@ dl.meta dt { color: var(--muted); font-family: var(--mono); font-size: 11px; tex
 @media (max-width: 860px) {
   .project { height: auto; overflow: visible; }
   .stage { position: relative; height: 72vh; height: 72svh; }
-  .panel, .project.panel-hidden .panel {
-    position: static; width: auto; transform: none; visibility: visible;
-    box-shadow: none; padding: 24px 16px 40px;
-  }
+  .drawer, .project.panel-hidden .drawer { position: static; display: block; transform: none; }
+  .strip { display: none; }
+  .zone.next { right: 0; }
+  .panel, .project.panel-hidden .panel { width: auto; visibility: visible; padding: 24px 16px 40px; }
   .stage-bar, .project.panel-hidden .stage-bar { padding-right: 22px; }
   [data-action="panel"] { display: none; }
   .caption { display: none; }
