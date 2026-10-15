@@ -32,6 +32,9 @@
   --accent: #111;
   --panel-w: clamp(320px, 28vw, 440px);
   --strip-w: 44px;
+  --strip: #ffe100;        /* bold yellow, closed */
+  --strip-hover: #ffd000;
+  --panel-bg: #fff;        /* strip fades to this on open */
   --gutter: 28px;
   --font: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
   --mono: var(--font);
@@ -183,8 +186,7 @@ a { color: inherit; text-underline-offset: 3px; }
   margin: 0;
   padding: 22px 0;
   border: 0;
-  border-left: 1px solid rgba(0,0,0,.08);
-  background: var(--paper);
+  background: var(--strip);
   color: var(--ink);
   font: inherit;
   cursor: pointer;
@@ -193,9 +195,10 @@ a { color: inherit; text-underline-offset: 3px; }
   align-items: center;
   justify-content: space-between;
   box-shadow: -10px 0 30px rgba(0,0,0,.22);
-  transition: background 200ms ease;
+  transition: background-color 500ms ease;
 }
-.strip:hover { background: #fff; }
+.project.panel-hidden .strip:hover { background: var(--strip-hover); }
+.project:not(.panel-hidden) .strip { background: var(--panel-bg); }
 .strip:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
 .strip-label {
   writing-mode: vertical-rl;
@@ -220,7 +223,7 @@ a { color: inherit; text-underline-offset: 3px; }
 
 .panel {
   width: var(--panel-w);
-  background: var(--paper);
+  background: var(--panel-bg);
   transition: visibility 0s linear 0s;
   overflow-y: auto;
   padding: var(--gutter);
@@ -284,6 +287,30 @@ dl.meta dt { color: var(--muted); font-family: var(--mono); font-size: 11px; tex
   justify-content: space-between;
   gap: 12px;
 }
+
+/* ---------- Home: project menu ---------- */
+.menu ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.menu li { border-bottom: 1px solid var(--rule); }
+.menu a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 6px;
+  margin: 0 -6px;
+  text-decoration: none;
+  transition: background-color 200ms ease;
+}
+.menu .menu-label { font-size: 24px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.menu .menu-meta { font-size: 12px; color: var(--muted); }
+.menu a:hover, .menu a:focus-visible { background: var(--strip); outline: none; }
+.menu a.is-current .menu-label::after { content: " \2190"; font-weight: 400; font-size: 16px; }
+.home .panel header { margin-bottom: -8px; }
+
+/* caption that links to its project (home page) */
+.caption-link { color: inherit; text-decoration: none; }
+.caption-link:hover { text-decoration: underline; }
+.slide.broken { display: none; }
 
 /* ---------- Index page ---------- */
 .index {

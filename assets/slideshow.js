@@ -56,12 +56,16 @@
   const playBtn = btn("Pause", "play", "Pause slideshow");
   const controls = el("div", { class: "controls" },
     btn("←", "prev", "Previous"), counter, btn("→", "next", "Next"),
-    playBtn, btn("Info", "panel", "Hide project details"), btn("⤢", "full", "Full screen"));
+    playBtn, btn("⤢", "full", "Full screen"));
   stage.append(el("div", { class: "stage-bar" }, caption, controls));
   if (data.slides.length < 2) playBtn.hidden = true;
 
   // ---------- Build panel ----------
-  const panel = el("aside", { class: "panel" });
+  const drawer = el("aside", { class: "drawer", "aria-label": "Project information" });
+  const strip = el("button", { class: "strip", type: "button", "aria-expanded": "false", "aria-controls": "project-panel" },
+    el("span", { class: "strip-label" }, data.title + "  \u00b7  Info"),
+    el("span", { class: "strip-icon", "aria-hidden": "true" }, "+"));
+  const panel = el("div", { class: "panel", id: "project-panel" });
   const header = el("header", {},
     data.eyebrow ? el("p", { class: "eyebrow" }, data.eyebrow) : "",
     el("h1", {}, data.title),
@@ -92,7 +96,9 @@
     el("a", { href: "../" }, "← All projects"),
     el("span", {}, data.credit || "Patrick Walker")));
 
-  root.append(stage, panel);
+  drawer.append(strip, panel);
+  root.append(stage, drawer);
+  root.classList.add("panel-hidden");
 
   // ---------- Behaviour ----------
   let current = 0, timer = null, playing = AUTOPLAY_MS > 0 && data.slides.length > 1;
@@ -152,10 +158,6 @@
     if (a === "prev") show(current - 1);
     if (a === "next") show(current + 1);
     if (a === "play") setPlaying(!playing);
-    if (a === "panel") {
-      const hidden = root.classList.toggle("panel-hidden");
-      e.target.setAttribute("aria-label", hidden ? "Show project details" : "Hide project details");
-    }
     if (a === "full") {
       if (document.fullscreenElement) document.exitFullscreen();
       else (stage.requestFullscreen || stage.webkitRequestFullscreen)?.call(stage);
@@ -167,9 +169,35 @@
     if (e.key === "ArrowRight") show(current + 1);
     else if (e.key === "ArrowLeft") show(current - 1);
     else if (e.key === " " && document.activeElement === stage) { e.preventDefault(); setPlaying(!playing); }
-    else if (e.key === "i") root.classList.toggle("panel-hidden");
+    else if (e.key === "i") setPanel(!isOpen(), true);
+    else if (e.key === "Escape" && isOpen()) setPanel(false);
     else if (e.key === "f") controls.querySelector('[data-action="full"]').click();
   });
+
+  // ---------- Info drawer: hover to peek, click to pin ----------
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  let pinned = false, closeTimer = null;
+  function isOpen() { return !root.classList.contains("panel-hidden"); }
+  function setPanel(open, pin = false) {
+    clearTimeout(closeTimer);
+    pinned = open && pin;
+    root.classList.toggle("panel-hidden", !open);
+    root.classList.toggle("panel-pinned", pinned);
+    strip.setAttribute("aria-expanded", String(open));
+  }
+  strip.addEventListener("click", () => {
+    // a click after a hover-peek pins it open; the next click closes
+    if (isOpen() && pinned) setPanel(false);
+    else setPanel(true, true);
+  });
+  if (canHover) {
+    strip.addEventListener("mouseenter", () => { if (!isOpen()) setPanel(true); });
+    drawer.addEventListener("mouseenter", () => clearTimeout(closeTimer));
+    drawer.addEventListener("mouseleave", () => {
+      if (pinned) return;
+      closeTimer = setTimeout(() => setPanel(false), 350);
+    });
+  }
 
   // swipe
   let x0 = null;
