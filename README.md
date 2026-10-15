@@ -3,9 +3,10 @@
 Simple GitHub Pages site: one page per project, full-screen slideshow on the left, project details on the right (stacks on phones). No build step, no dependencies.
 
 ```
-index.html            project list
-assets/site.css      shared design
-assets/site.js   shared slideshow
+index.html            home page (text: content.md)
+assets/site.css       shared design
+assets/site.js        shared slideshow
+publish.sh            copies Obsidian notes in and pushes
 foxes/                index.html + images/
 concrete/             index.html + images/
 _template/            copy this to start a new project
@@ -36,11 +37,30 @@ The slideshow auto-advances every 2 seconds on image slides and stops on video/e
 
 Info: hover the strip on the right edge to peek, click to keep it open. Over the image: click the outer numbers (e.g. 15 · 01 · 02) to go back or forward; the controls fade after 2.5s without activity. Keys: ← → to move, `i` toggles the panel, Esc closes it, `f` full screen, space pauses.
 
+## Editing text (from Obsidian)
+
+The words on each page come from a Markdown note, not the HTML:
+
+- Obsidian `Projects/Project Pages/Home - About.md`  ->  `content.md` (home)
+- Obsidian `Projects/Project Pages/<project>/<Name>.md`  ->  `<project>/content.md`
+
+Edit the note in Obsidian, then in Terminal:
+
+```bash
+cd ~/Sites/projects
+bash publish.sh "what changed"
+```
+
+That copies the notes in, commits and pushes. Note format: `# Title`, an optional `*eyebrow*` line and a subtitle line, then `## Section` headings. Paragraphs become text, `- item` becomes a list, `| Label | Value |` rows become the details table, `- [Label](url)` becomes a link, `- Related: [Label](../project/)` a related link. On the home note, links under `## Projects` become the menu (`- [Concrete](concrete/) 2025`). Under `## Images`, each line sets an image's description and caption: `` - `images/01.jpg`: description *caption* ``.
+
+If a note is missing, the page falls back to the text built into its `index.html`.
+
 ## Adding a project
 
 1. Copy `_template/` to a new folder, e.g. `schwalbe/`.
 2. Edit the data block in its `index.html` and add images.
-3. Add a card for it in the root `index.html`.
+3. Copy `_template/Project name.md` into Obsidian as `Project Pages/<project>/<Name>.md` and write the text there.
+4. Add a line for it under `## Projects` in `Home - About.md`, then `bash publish.sh`.
 
 ## Publishing on GitHub Pages
 

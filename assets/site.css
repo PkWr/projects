@@ -407,3 +407,6 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
 @media (prefers-reduced-motion: reduce) {
   .slide { transition: none; }
 }
+
+/* used when arriving with the panel already open */
+.no-anim .drawer, .no-anim .panel, .no-anim .strip, .no-anim .stage-bar { transition: none !important; }

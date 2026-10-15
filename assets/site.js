@@ -21,6 +21,8 @@
   const dataEl = document.getElementById("project-data");
   if (!dataEl) return;
   const data = JSON.parse(dataEl.textContent);
+  // Text can live in a Markdown file next to the page (copied from Obsidian); it overrides the built-in text.
+  if (data.content) await applyMarkdown(data, data.content);
   if (data.pool) {
     const pooled = await gatherPool(data.menu || []);
     // fall back to the page's own "slides" if the projects can't be read
@@ -368,6 +370,30 @@
       });
     }
 
+    // ---------- carry the open panel across pages ----------
+    // Clicking a link inside the panel (e.g. home menu -> project) opens the next page with the panel already out.
+    const CARRY_KEY = "pkwr-panel";
+    panel.addEventListener("click", e => {
+      const a = e.target.closest("a[href]");
+      if (!a || a.target === "_blank" || a.href.startsWith("mailto:") || a.getAttribute("href").startsWith("#")) return;
+      if (new URL(a.href, location.href).origin !== location.origin) return;
+      try { sessionStorage.setItem(CARRY_KEY, pinned ? "pinned" : "open"); } catch (err) {}
+    });
+    let carried = null;
+    try { carried = sessionStorage.getItem(CARRY_KEY); sessionStorage.removeItem(CARRY_KEY); } catch (err) {}
+    if (carried && !window.matchMedia("(max-width: 860px)").matches) {
+      root.classList.add("no-anim");                 // appear already open, no slide-in
+      setPanel(true, carried === "pinned");
+      requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove("no-anim")));
+      // if it wasn't pinned and the pointer turns out to be over the image, close as normal
+      if (carried !== "pinned" && canHover) {
+        document.addEventListener("mousemove", function first(e) {
+          document.removeEventListener("mousemove", first);
+          if (!drawer.contains(e.target) && !pinned) closeTimer = setTimeout(() => setPanel(false), CLOSE_DELAY_MS);
+        });
+      }
+    }
+
     // swipe
     let x0 = null;
     stage.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
@@ -393,6 +419,93 @@
     return n;
   }
   function pad(n) { return String(n).padStart(2, "0"); }
+  // ---------- Markdown content ----------
+  async function applyMarkdown(d, file) {
+    let src;
+    try {
+      const r = await fetch(new URL(file, location.href), { cache: "no-cache" });
+      if (!r.ok) return;
+      src = await r.text();
+    } catch (e) { return; }               // e.g. opened from disk: keep the built-in text
+    const md = parseMarkdown(src);
+    if (md.title) d.title = md.title;
+    if (md.eyebrow !== undefined) d.eyebrow = md.eyebrow;
+    if (md.subtitle !== undefined) d.subtitle = md.subtitle;
+    if (md.sections.length) {
+      d.sections = md.sections;
+      const menuSec = md.sections.find(s => s.menu);
+      if (menuSec) d.menu = menuSec.menu;
+    }
+    (md.images || []).forEach(im => {
+      const sl = (d.slides || []).find(s => s.src === im.src);
+      if (sl) { if (im.alt) sl.alt = im.alt; sl.caption = im.caption; }
+    });
+  }
+
+  function parseMarkdown(src) {
+    src = src.replace(/^\uFEFF/, "").replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, "").replace(/<!--[\s\S]*?-->/g, "");
+    const out = { sections: [] };
+    let sec = null, para = [], intro = true, inImages = false;
+    const flush = () => {
+      const p = para.join(" ").trim(); para = [];
+      if (!p) return;
+      if (intro) { if (out.subtitle === undefined) out.subtitle = p; }
+      else if (sec) (sec.text = sec.text || []).push(p);
+    };
+    for (const raw of src.split(/\r?\n/)) {
+      const line = raw.trim();
+      let m;
+      if ((m = line.match(/^#\s+(.+)/)) && !out.title) { out.title = m[1].trim(); continue; }
+      if ((m = line.match(/^##\s+(.+)/))) {
+        flush(); intro = false;
+        const title = m[1].trim();
+        inImages = /^images\b/i.test(title);
+        if (inImages) { sec = null; continue; }
+        sec = { id: slug(title), title };
+        out.sections.push(sec);
+        continue;
+      }
+      if (!line) { flush(); continue; }
+      if (intro) {
+        if ((m = line.match(/^[*_](.+)[*_]$/))) out.eyebrow = m[1].trim();
+        else para.push(line);
+        continue;
+      }
+      if (inImages) {
+        if ((m = line.match(/^[-*]\s+`([^`]+)`:?\s*(.*)$/))) {
+          let rest = m[2], caption = "";
+          const c = rest.match(/\*([^*]*)\*\s*$/);
+          if (c) { caption = c[1].trim(); rest = rest.slice(0, c.index); }
+          (out.images = out.images || []).push({ src: m[1].trim(), alt: rest.trim(), caption });
+        }
+        continue;
+      }
+      if (!sec) continue;
+      if (line.startsWith("|")) {
+        flush();
+        const cells = line.replace(/^\||\|$/g, "").split("|").map(c => c.trim());
+        if (cells.every(c => /^:?-*:?$/.test(c))) continue;   // header or separator row
+        (sec.details = sec.details || []).push([cells[0], cells.slice(1).join(" | ")]);
+        continue;
+      }
+      if ((m = line.match(/^[-*]\s+(.+)/))) {
+        flush();
+        const item = m[1].trim();
+        let l;
+        if ((l = item.match(/^Related:\s*\[(.+?)\]\((.+?)\)/i))) (sec.related = sec.related || []).push({ label: l[1], href: l[2] });
+        else if ((l = item.match(/^\[(.+?)\]\((.+?)\)\s*(.*)$/))) {
+          if (/^projects$/i.test(sec.title)) (sec.menu = sec.menu || []).push({ label: l[1], href: l[2], meta: l[3].trim() });
+          else (sec.links = sec.links || []).push({ label: l[1], href: l[2] });
+        }
+        else (sec.list = sec.list || []).push(item);
+        continue;
+      }
+      para.push(line);
+    }
+    flush();
+    return out;
+  }
+
   function slug(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
   function missing(s) {
     return el("div", { class: "slide-missing" }, el("strong", {}, "Image not found"), s.src, el("br"), s.alt || "");
