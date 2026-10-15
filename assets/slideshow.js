@@ -4,7 +4,7 @@
   and this file builds the slideshow + details panel from it.
 
   Slide types:
-    { "src": "images/01.jpg", "alt": "...", "caption": "...", "fit": "cover" }   image (fit defaults to contain)
+    { "src": "images/01.jpg", "alt": "...", "caption": "...", "fit": "contain" }   image (fills the frame by default; "contain" shows it whole)
     { "type": "video", "src": "images/clip.mp4", "poster": "...", "caption": "..." }
     { "type": "embed", "src": "https://foxes.pkwr.co", "caption": "..." }     live piece in an iframe
 */
@@ -24,6 +24,7 @@
     const slide = el("figure", { class: "slide", "aria-roledescription": "slide", "aria-label": `${i + 1} of ${data.slides.length}` });
     slide.style.margin = "0";
     if (s.fit) slide.dataset.fit = s.fit;
+    if (s.position) slide.style.setProperty("--pos", s.position);
     const type = s.type || "image";
 
     if (type === "embed") {

@@ -1,5 +1,28 @@
 /* Project pages: full-bleed slideshow + details panel on the right */
 
+/* IBM Plex Mono Italic, self-hosted (SIL Open Font License, see fonts/OFL.txt) */
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/ibm-plex-mono-latin-400-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/ibm-plex-mono-latin-500-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/ibm-plex-mono-latin-700-italic.woff2") format("woff2");
+}
+
 :root {
   --ink: #111;
   --paper: #f4f2ee;
@@ -9,14 +32,15 @@
   --accent: #111;
   --panel-w: clamp(320px, 28vw, 440px);
   --gutter: 28px;
-  --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --mono: var(--font);
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
 body {
   font-family: var(--font);
+  font-style: italic;
   color: var(--ink);
   background: var(--paper);
   -webkit-font-smoothing: antialiased;
@@ -25,17 +49,17 @@ a { color: inherit; text-underline-offset: 3px; }
 
 /* ---------- Layout ---------- */
 .project {
-  display: grid;
-  grid-template-columns: 1fr var(--panel-w);
+  position: relative;
   height: 100vh;
   height: 100dvh;
+  overflow: hidden;
+  --slide-ease: cubic-bezier(.2, .7, .2, 1);
 }
-.project.panel-hidden { grid-template-columns: 1fr 0; }
-.project.panel-hidden .panel { visibility: hidden; }
 
 /* ---------- Stage ---------- */
 .stage {
-  position: relative;
+  position: absolute;
+  inset: 0;
   background: var(--stage);
   overflow: hidden;
   outline: none;
@@ -132,11 +156,27 @@ a { color: inherit; text-underline-offset: 3px; }
 }
 .progress.running { transition: width linear; }
 
-/* ---------- Panel ---------- */
+/* ---------- Panel (slides over the image) ---------- */
+.project.panel-hidden .panel {
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 450ms var(--slide-ease), visibility 0s linear 450ms;
+}
+/* keep the controls clear of the open panel */
+.stage-bar { transition: padding-right 450ms var(--slide-ease); padding-right: calc(var(--panel-w) + 22px); }
+.project.panel-hidden .stage-bar { padding-right: 22px; }
+
 .panel {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: var(--panel-w);
+  z-index: 5;
+  background: var(--paper);
+  box-shadow: -12px 0 40px rgba(0,0,0,.25);
+  transform: translateX(0);
+  transition: transform 450ms var(--slide-ease), visibility 0s linear 0s;
   overflow-y: auto;
   padding: var(--gutter);
-  border-left: 1px solid var(--rule);
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -152,19 +192,19 @@ a { color: inherit; text-underline-offset: 3px; }
 .panel h1 {
   font-size: clamp(30px, 2.6vw, 42px);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
   font-weight: 700;
   margin: 0;
 }
-.panel .subtitle { margin: 10px 0 0; color: var(--muted); font-size: 15px; }
+.panel .subtitle { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
 
-.panel .summary p { margin: 0 0 1em; font-size: 15px; line-height: 1.55; max-width: 60ch; }
+.panel .summary p { margin: 0 0 1em; font-size: 14px; line-height: 1.6; max-width: 60ch; }
 .panel .summary p:last-child { margin-bottom: 0; }
 
 dl.meta {
   margin: 0;
   display: grid;
-  grid-template-columns: 7.5em 1fr;
+  grid-template-columns: 8.5em 1fr;
   border-top: 1px solid var(--ink);
   font-size: 13px;
 }
@@ -226,13 +266,13 @@ dl.meta dt { color: var(--muted); font-family: var(--mono); font-size: 11px; tex
 
 /* ---------- Small screens: stack ---------- */
 @media (max-width: 860px) {
-  .project, .project.panel-hidden {
-    display: block;
-    height: auto;
+  .project { height: auto; overflow: visible; }
+  .stage { position: relative; height: 72vh; height: 72svh; }
+  .panel, .project.panel-hidden .panel {
+    position: static; width: auto; transform: none; visibility: visible;
+    box-shadow: none; padding: 24px 16px 40px;
   }
-  .stage { height: 72vh; height: 72svh; }
-  .panel { border-left: 0; padding: 24px 16px 40px; }
-  .project.panel-hidden .panel { visibility: visible; }
+  .stage-bar, .project.panel-hidden .stage-bar { padding-right: 22px; }
   [data-action="panel"] { display: none; }
   .caption { display: none; }
 }
