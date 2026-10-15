@@ -131,21 +131,31 @@ a { color: inherit; text-underline-offset: 3px; }
 }
 .stage-bar > * { pointer-events: auto; }
 .caption { max-width: 60ch; line-height: 1.4; opacity: .9; }
-.controls { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.controls { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+/* plain type over the image: no boxes */
 .controls button {
   font: inherit;
-  color: #eee;
-  background: rgba(0,0,0,.35);
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 2px;
+  color: #fff;
+  background: none;
+  border: 0;
   height: 32px;
-  min-width: 32px;
-  padding: 0 10px;
+  padding: 0 6px;
   cursor: pointer;
 }
-.controls button:hover { background: rgba(255,255,255,.15); }
-.controls button:focus-visible, .zone:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-.counter { font-family: var(--mono); font-size: 12px; padding: 0 8px; font-variant-numeric: tabular-nums; }
+.controls button:focus-visible, .zone:focus-visible { outline: 1px solid #fff; outline-offset: 2px; }
+/* numbers: previous · current · next; the outer two are the links */
+.num { font-size: 13px; font-variant-numeric: tabular-nums; }
+.controls .num { opacity: .5; transition: opacity 200ms ease; }
+.controls .num:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+.num.current { color: #fff; padding: 0 6px; }
+.controls .icon { display: inline-flex; align-items: center; opacity: .8; margin-left: 10px; transition: opacity 200ms ease; }
+.controls .icon + .icon { margin-left: 2px; }
+.controls .icon:hover { opacity: 1; }
+
+/* fade the overlay after a few seconds without activity */
+.progress { transition: opacity 600ms ease; }
+.ui-idle .stage-bar, .ui-idle .progress { opacity: 0; pointer-events: none; }
+.ui-idle .stage, .ui-idle .zone { cursor: none; }
 
 .progress {
   position: absolute;
@@ -155,15 +165,16 @@ a { color: inherit; text-underline-offset: 3px; }
   z-index: 3;
   width: 0;
 }
-.progress.running { transition: width linear; }
+.progress.running { transition: width linear, opacity 600ms ease; }
 
 /* ---------- Panel (slides over the image) ---------- */
 .project.panel-hidden .panel {
   visibility: hidden;
-  transition: visibility 0s linear 450ms;
+  background: var(--strip);   /* the whole side is yellow while closed, fading to white as it opens */
+  transition: visibility 0s linear 450ms, background-color 300ms ease;
 }
 /* keep the controls clear of the open panel */
-.stage-bar { transition: padding-right 450ms var(--slide-ease); padding-right: calc(var(--panel-w) + var(--strip-w) + 22px); }
+.stage-bar { transition: padding-right 450ms var(--slide-ease), opacity 600ms ease; padding-right: calc(var(--panel-w) + var(--strip-w) + 22px); }
 .project.panel-hidden .stage-bar { padding-right: calc(var(--strip-w) + 22px); }
 
 .drawer {
@@ -192,7 +203,7 @@ a { color: inherit; text-underline-offset: 3px; }
   align-items: center;
   justify-content: space-between;
   box-shadow: -10px 0 30px rgba(0,0,0,.22);
-  transition: background-color 500ms ease;
+  transition: background-color 700ms ease 120ms;
 }
 .project.panel-hidden .strip:hover { background: var(--strip-hover); }
 .project:not(.panel-hidden) .strip { background: var(--panel-bg); }
@@ -221,7 +232,7 @@ a { color: inherit; text-underline-offset: 3px; }
 .panel {
   width: var(--panel-w);
   background: var(--panel-bg);
-  transition: visibility 0s linear 0s;
+  transition: visibility 0s linear 0s, background-color 700ms ease 120ms;
   overflow-y: auto;
   padding: var(--gutter);
   display: flex;
@@ -237,8 +248,8 @@ a { color: inherit; text-underline-offset: 3px; }
   margin: 0 0 14px;
 }
 .panel h1 {
-  font-size: clamp(40px, 3.6vw, 64px);
-  line-height: .95;
+  font-size: clamp(30px, 2.6vw, 42px);
+  line-height: 1;
   letter-spacing: -0.03em;
   font-weight: 300;
   margin: 0;
@@ -298,7 +309,7 @@ dl.meta dt { color: var(--muted); font-family: var(--mono); font-size: 11px; tex
   text-decoration: none;
   transition: background-color 200ms ease;
 }
-.menu .menu-label { font-size: clamp(28px, 2.4vw, 40px); font-weight: 300; letter-spacing: -0.02em; line-height: 1.05; }
+.menu .menu-label { font-size: 24px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.05; }
 .menu .menu-meta { font-size: 12px; color: var(--muted); }
 .menu a:hover, .menu a:focus-visible { background: var(--strip); outline: none; }
 .menu a.is-current .menu-label::after { content: " \2190"; font-weight: 400; font-size: 16px; }

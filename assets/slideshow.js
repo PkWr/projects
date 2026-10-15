@@ -13,10 +13,21 @@
   home page stays in sync as projects are added or changed.
 */
 (async function () {
+  const ICON = {
+    pause: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><rect x="4" y="2.5" width="1.6" height="11" fill="currentColor"/><rect x="10.4" y="2.5" width="1.6" height="11" fill="currentColor"/></svg>',
+    play: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4.5 2.5 L13 8 L4.5 13.5 Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+    full: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg>'
+  };
   const dataEl = document.getElementById("project-data");
   if (!dataEl) return;
   const data = JSON.parse(dataEl.textContent);
-  if (data.pool) data.slides = await gatherPool(data.menu || []);
+  if (data.pool) {
+    const pooled = await gatherPool(data.menu || []);
+    // fall back to the page's own "slides" if the projects can't be read
+    // (e.g. when index.html is opened straight from disk rather than via a web server)
+    if (pooled.length) data.slides = pooled;
+  }
+  data.slides = data.slides || [];
   build(data);
 
   // Fetch each project page, read its slide list, and pool the still images.
@@ -64,7 +75,7 @@
       if (s.position) slide.style.setProperty("--pos", s.position);
       const type = s.type || "image";
       const onMissing = () => {
-        if (skipMissing) { slide.classList.add("broken"); if (current === i) show(current + 1); }
+        if (skipMissing) { slide.classList.add("broken"); if (current === i) show(current + 1); else updateNums(); }
         else slide.replaceChildren(missing(s));
       };
 
@@ -92,15 +103,18 @@
     stage.append(prevZone, nextZone);
 
     const caption = el("div", { class: "caption", "aria-live": "polite" });
-    const counter = el("span", { class: "counter" });
-    const btn = (label, action, aria) => el("button", { type: "button", "data-action": action, "aria-label": aria }, label);
-    const playBtn = btn("Pause", "play", "Pause slideshow");
-    const controls = el("div", { class: "controls" },
-      btn("←", "prev", "Previous"), counter, btn("→", "next", "Next"),
-      playBtn, btn("⤢", "full", "Full screen"));
-    stage.append(el("div", { class: "stage-bar" }, caption, controls));
-    if (data.slides.length < 2) playBtn.hidden = true;
-    if (data.home) counter.hidden = true;
+    const btn = (label, action, aria, cls) => el("button", { type: "button", "data-action": action, "aria-label": aria, class: cls }, label);
+    // numbers do the navigating: previous · current · next
+    const prevNum = btn("", "prev", "Previous image", "num");
+    const curNum = el("span", { class: "num current", "aria-current": "true" });
+    const nextNum = btn("", "next", "Next image", "num");
+    const playBtn = btn("", "play", "Pause slideshow", "icon");
+    const fullBtn = btn("", "full", "Full screen", "icon");
+    fullBtn.innerHTML = ICON.full;
+    const controls = el("div", { class: "controls" }, prevNum, curNum, nextNum, playBtn, fullBtn);
+    const stageBar = el("div", { class: "stage-bar" }, caption, controls);
+    stage.append(stageBar);
+    if (data.slides.length < 2) prevNum.hidden = nextNum.hidden = playBtn.hidden = true;
 
     // ---------- Build panel ----------
     const drawer = el("aside", { class: "drawer", "aria-label": data.home ? "Menu and biography" : "Project information" });
@@ -179,9 +193,20 @@
       const s = data.slides[current];
       stage.classList.toggle("has-iframe", (s.type || "image") === "embed");
       caption.replaceChildren(s.href ? el("a", { href: s.href, class: "caption-link" }, (s.caption || "") + "  →") : (s.caption || ""));
-      counter.textContent = `${pad(current + 1)} / ${pad(n)}`;
+      updateNums();
       menuLinks.forEach(a => a.classList.toggle("is-current", a.dataset.project === s.project));
       restartTimer();
+    }
+
+    // number among the images that actually exist
+    function updateNums() {
+      const live = slides.map((sl, j) => sl.classList.contains("broken") ? -1 : j).filter(j => j >= 0);
+      const m = live.length || 1, pos = Math.max(0, live.indexOf(current));
+      curNum.textContent = pad(pos + 1);
+      prevNum.textContent = pad(((pos - 1 + m) % m) + 1);
+      // on the first slide, don't show the wrap-around number (it reads as a total)
+      prevNum.style.visibility = pos === 0 ? "hidden" : "";
+      nextNum.textContent = pad(((pos + 1) % m) + 1);
     }
 
     function restartTimer() {
@@ -200,13 +225,27 @@
 
     function setPlaying(p) {
       playing = p;
-      playBtn.textContent = p ? "Pause" : "Play";
+      playBtn.innerHTML = p ? ICON.pause : ICON.play;
       playBtn.setAttribute("aria-label", p ? "Pause slideshow" : "Play slideshow");
       restartTimer();
     }
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) playing = false;
-    playBtn.textContent = playing ? "Pause" : "Play";
+    playBtn.innerHTML = playing ? ICON.pause : ICON.play;
+    playBtn.setAttribute("aria-label", playing ? "Pause slideshow" : "Play slideshow");
+
+    // ---------- fade the overlay after inactivity ----------
+    const IDLE_MS = data.idle || 2500;
+    let idleTimer = null, overBar = false;
+    function wake() {
+      root.classList.remove("ui-idle");
+      clearTimeout(idleTimer);
+      if (!overBar) idleTimer = setTimeout(() => root.classList.add("ui-idle"), IDLE_MS);
+    }
+    stageBar.addEventListener("mouseenter", () => { overBar = true; wake(); });
+    stageBar.addEventListener("mouseleave", () => { overBar = false; wake(); });
+    ["mousemove", "pointerdown", "keydown", "touchstart", "wheel"].forEach(ev => document.addEventListener(ev, wake, { passive: true }));
+    wake();
 
     prevZone.onclick = () => show(current - 1, -1);
     nextZone.onclick = () => show(current + 1);
