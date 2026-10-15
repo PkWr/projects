@@ -227,6 +227,15 @@ a { color: inherit; text-underline-offset: 3px; }
 @media (prefers-reduced-motion: no-preference) {
   .project.panel-hidden .strip-icon { animation: nudge 2.4s ease-in-out 1.2s 2; }
 }
+/* subtle bounce when the mouse wakes the page */
+.strip.bounce { animation: strip-bounce 750ms cubic-bezier(.3, .7, .3, 1); }
+@keyframes strip-bounce {
+  0%   { transform: translateX(0); }
+  30%  { transform: translateX(-7px); }
+  55%  { transform: translateX(0); }
+  75%  { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
 @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-4px); } }
 
 .panel {

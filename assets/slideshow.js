@@ -237,7 +237,20 @@
     // ---------- fade the overlay after inactivity ----------
     const IDLE_MS = data.idle || 2500;
     let idleTimer = null, overBar = false;
-    function wake() {
+    // a small bounce of the strip when the mouse starts moving again (closed panel only, at most every few seconds)
+    let lastBounce = 0;
+    function bounce() {
+      const now = Date.now();
+      if (!root.classList.contains("panel-hidden") || now - lastBounce < 4000) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      lastBounce = now;
+      strip.classList.remove("bounce"); void strip.offsetWidth; strip.classList.add("bounce");
+    }
+    strip.addEventListener("animationend", () => strip.classList.remove("bounce"));
+    let firstMove = true;
+    function wake(e) {
+      const wasIdle = root.classList.contains("ui-idle");
+      if (e && e.type === "mousemove" && (wasIdle || firstMove)) { firstMove = false; bounce(); }
       root.classList.remove("ui-idle");
       clearTimeout(idleTimer);
       if (!overBar) idleTimer = setTimeout(() => root.classList.add("ui-idle"), IDLE_MS);
