@@ -8,20 +8,6 @@
   font-display: swap;
   src: url("fonts/ibm-plex-mono-latin-400-italic.woff2") format("woff2");
 }
-@font-face {
-  font-family: "IBM Plex Mono";
-  font-style: italic;
-  font-weight: 500;
-  font-display: swap;
-  src: url("fonts/ibm-plex-mono-latin-500-italic.woff2") format("woff2");
-}
-@font-face {
-  font-family: "IBM Plex Mono";
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url("fonts/ibm-plex-mono-latin-700-italic.woff2") format("woff2");
-}
 
 :root {
   --ink: #111;
@@ -30,8 +16,9 @@
   --rule: #d9d5ce;
   --stage: #0b0b0b;
   --accent: #111;
-  --panel-w: clamp(320px, 28vw, 440px);
   --strip-w: 44px;
+  /* sidebar (strip + panel) takes a third of the window, never narrower than ~360px */
+  --panel-w: max(320px, calc(100vw / 3 - var(--strip-w)));
   --strip: #ffe100;        /* bold yellow, closed */
   --strip-hover: #ffd000;
   --panel-bg: #fff;        /* strip fades to this on open */
@@ -41,6 +28,9 @@
 }
 
 * { box-sizing: border-box; }
+/* no bold anywhere: one weight only, and no faux-bold */
+h1, h2, h3, h4, strong, b, th, dt { font-weight: 400; }
+html { font-synthesis: none; }
 html, body { margin: 0; height: 100%; }
 body {
   font-family: var(--font);
@@ -242,8 +232,8 @@ a { color: inherit; text-underline-offset: 3px; }
 .panel h1 {
   font-size: clamp(30px, 2.6vw, 42px);
   line-height: 1;
-  letter-spacing: -0.04em;
-  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-weight: 400;
   margin: 0;
 }
 .panel .subtitle { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
@@ -301,7 +291,7 @@ dl.meta dt { color: var(--muted); font-family: var(--mono); font-size: 11px; tex
   text-decoration: none;
   transition: background-color 200ms ease;
 }
-.menu .menu-label { font-size: 24px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.menu .menu-label { font-size: 24px; font-weight: 400; letter-spacing: -0.01em; line-height: 1.1; }
 .menu .menu-meta { font-size: 12px; color: var(--muted); }
 .menu a:hover, .menu a:focus-visible { background: var(--strip); outline: none; }
 .menu a.is-current .menu-label::after { content: " \2190"; font-weight: 400; font-size: 16px; }
