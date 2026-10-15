@@ -105,7 +105,7 @@
     // ---------- Build panel ----------
     const drawer = el("aside", { class: "drawer", "aria-label": data.home ? "Menu and biography" : "Project information" });
     const strip = el("button", { class: "strip", type: "button", "aria-expanded": "false", "aria-controls": "project-panel" },
-      el("span", { class: "strip-label" }, data.stripLabel || (data.title + "  ·  Info")),
+      el("span", { class: "strip-label" }, data.stripLabel || [data.credit || "Patrick Walker", data.title, "Info"].join("  ·  ")),
       el("span", { class: "strip-icon", "aria-hidden": "true" }, "+"));
     const panel = el("div", { class: "panel", id: "project-panel" });
     panel.append(el("header", {},
@@ -238,6 +238,7 @@
     });
 
     // ---------- Info drawer: hover to peek, click to pin ----------
+    const CLOSE_DELAY_MS = data.closeDelay || 1500;   // linger after the mouse leaves, so it doesn't snap shut
     let pinned = false, closeTimer = null;
     function isOpen() { return !root.classList.contains("panel-hidden"); }
     function setPanel(open, pin = false) {
@@ -257,7 +258,7 @@
       drawer.addEventListener("mouseenter", () => clearTimeout(closeTimer));
       drawer.addEventListener("mouseleave", () => {
         if (pinned) return;
-        closeTimer = setTimeout(() => setPanel(false), 350);
+        closeTimer = setTimeout(() => setPanel(false), CLOSE_DELAY_MS);
       });
     }
 
