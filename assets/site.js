@@ -67,8 +67,6 @@
 
     // ---------- Build stage ----------
     const stage = el("section", { class: "stage", tabindex: "0", "aria-roledescription": "carousel", "aria-label": data.title + " images" });
-    const progress = el("div", { class: "progress" });
-    stage.append(progress);
 
     const slides = data.slides.map((s, i) => {
       const slide = el("figure", { class: "slide", "aria-roledescription": "slide", "aria-label": `${i + 1} of ${data.slides.length}` });
@@ -267,15 +265,9 @@
 
     function restartTimer() {
       clearTimeout(timer);
-      progress.classList.remove("running");
-      progress.style.width = "0";
       const s = data.slides[current];
       // don't auto-advance away from live embeds or videos
       if (!s || !playing || (s.type && s.type !== "image")) return;
-      void progress.offsetWidth;
-      progress.style.transitionDuration = AUTOPLAY_MS + "ms";
-      progress.classList.add("running");
-      progress.style.width = "100%";
       timer = setTimeout(() => show(current + 1), AUTOPLAY_MS);
     }
 
