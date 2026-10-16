@@ -84,9 +84,9 @@ a { color: inherit; text-underline-offset: 3px; }
   display: block;
 }
 .slide[data-fit="contain"] { --fit: contain; }
-/* two portrait images side by side */
-.slide.pair { gap: 2vw; padding: 4vh 4vw; }
-.slide.pair img { width: auto; flex: 1 1 0; min-width: 0; height: 100%; object-fit: contain; }
+/* two portrait images side by side, each filling its half of the screen (slight crop top/bottom) */
+.slide.pair { gap: 0; padding: 0; }
+.slide.pair img { width: 0; flex: 1 1 0; min-width: 0; height: 100%; object-fit: cover; }
 
 /* home page: everything in greyscale; colour arrives on the project pages */
 .home .slide { filter: grayscale(1); }
