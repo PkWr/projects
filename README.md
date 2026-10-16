@@ -33,7 +33,7 @@ Currently expected:
 { "type": "embed", "src": "https://foxes.pkwr.co", "caption": "..." }       live web piece in a frame
 ```
 
-The slideshow auto-advances every 2 seconds on image slides and stops on video/embed slides. Set `"autoplay": false` (or a number of milliseconds) at the top of a page's data block to change that.
+The slideshow holds each image for 5 seconds with a slow 2.5s crossfade and gentle drift (clicks and keys use a quick fade). Live embeds stay put unless given a "duration". Set `"autoplay": false` (or a number of milliseconds) at the top of a page's data block to change that.
 
 Info: hover the strip on the right edge to peek, click to keep it open. Over the image: click the outer numbers (e.g. 15 · 01 · 02) to go back or forward; the controls fade after 2.5s without activity. Keys: ← → to move, `i` toggles the panel, Esc closes it, `f` full screen, space pauses.
 

@@ -63,7 +63,7 @@
 
   function build(data) {
     const root = document.querySelector(".project");
-    const AUTOPLAY_MS = data.autoplay === false ? 0 : (data.autoplay || 2000);
+    const AUTOPLAY_MS = data.autoplay === false ? 0 : (data.autoplay || 5000);
     const skipMissing = !!data.pool;   // on the home page, quietly skip images that don't exist yet
     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -254,6 +254,9 @@
       restartTimer();
     }
 
+    // manual moves (clicks, keys, swipes) use a quick fade; autoplay uses the slow ambient one
+    function go(i, dir = 1) { stage.classList.add("quick"); show(i, dir); }
+
     // number among the images that actually exist
     function updateNums() {
       const live = slides.map((sl, j) => sl.classList.contains("broken") ? -1 : j).filter(j => j >= 0);
@@ -271,7 +274,7 @@
       if (!s || !playing) return;
       // live embeds and videos stay put unless they're given their own "duration"
       if (s.type && s.type !== "image" && !s.duration) return;
-      timer = setTimeout(() => show(current + 1), s.duration || AUTOPLAY_MS);
+      timer = setTimeout(() => { stage.classList.remove("quick"); show(current + 1); }, s.duration || AUTOPLAY_MS);
     }
 
     function setPlaying(p) {
@@ -311,12 +314,12 @@
     ["mousemove", "pointerdown", "keydown", "touchstart", "wheel"].forEach(ev => document.addEventListener(ev, wake, { passive: true }));
     wake();
 
-    prevZone.onclick = () => show(current - 1, -1);
-    nextZone.onclick = () => show(current + 1);
+    prevZone.onclick = () => go(current - 1, -1);
+    nextZone.onclick = () => go(current + 1);
     controls.addEventListener("click", e => {
       const a = e.target.closest("button")?.dataset.action;
-      if (a === "prev") show(current - 1, -1);
-      if (a === "next") show(current + 1);
+      if (a === "prev") go(current - 1, -1);
+      if (a === "next") go(current + 1);
       if (a === "play") setPlaying(!playing);
       if (a === "full") {
         if (document.fullscreenElement) document.exitFullscreen();
@@ -327,13 +330,13 @@
     // Home: hovering a project name brings up one of its images
     if (canHover) menuLinks.forEach(a => a.addEventListener("mouseenter", () => {
       const idx = data.slides.map((s, i) => s.project === a.dataset.project && !slides[i].classList.contains("broken") ? i : -1).filter(i => i >= 0);
-      if (idx.length && data.slides[current].project !== a.dataset.project) show(idx[Math.floor(Math.random() * idx.length)]);
+      if (idx.length && data.slides[current].project !== a.dataset.project) go(idx[Math.floor(Math.random() * idx.length)]);
     }));
 
     document.addEventListener("keydown", e => {
       if (e.target.closest("input, textarea")) return;
-      if (e.key === "ArrowRight") show(current + 1);
-      else if (e.key === "ArrowLeft") show(current - 1, -1);
+      if (e.key === "ArrowRight") go(current + 1);
+      else if (e.key === "ArrowLeft") go(current - 1, -1);
       else if (e.key === " " && document.activeElement === stage) { e.preventDefault(); setPlaying(!playing); }
       else if (e.key === "i") setPanel(!isOpen(), true);
       else if (e.key === "Escape" && isOpen()) setPanel(false);
@@ -395,7 +398,7 @@
     stage.addEventListener("touchend", e => {
       if (x0 === null) return;
       const dx = e.changedTouches[0].clientX - x0;
-      if (Math.abs(dx) > 40) dx < 0 ? show(current + 1) : show(current - 1, -1);
+      if (Math.abs(dx) > 40) dx < 0 ? go(current + 1) : go(current - 1, -1);
       x0 = null;
     });
 
@@ -428,8 +431,9 @@
     if (md.subtitle !== undefined) d.subtitle = md.subtitle;
     if (md.sections.length) {
       d.sections = md.sections;
-      const menuSec = md.sections.find(s => s.menu);
-      if (menuSec) d.menu = menuSec.menu;
+      // every menu group (e.g. Projects, Research & teaching) feeds the home rotation
+      const menus = md.sections.filter(s => s.menu).flatMap(s => s.menu);
+      if (menus.length) d.menu = menus;
     }
     (md.images || []).forEach(im => {
       const sl = (d.slides || []).find(s => s.src === im.src);
@@ -489,7 +493,7 @@
         let l;
         if ((l = item.match(/^Related:\s*\[(.+?)\]\((.+?)\)/i))) (sec.related = sec.related || []).push({ label: l[1], href: l[2] });
         else if ((l = item.match(/^\[(.+?)\]\((.+?)\)\s*(.*)$/))) {
-          if (/^projects$/i.test(sec.title)) (sec.menu = sec.menu || []).push({ label: l[1], href: l[2], meta: l[3].trim() });
+          if (/projects|research|teaching/i.test(sec.title)) (sec.menu = sec.menu || []).push({ label: l[1], href: l[2], meta: l[3].trim() });
           else (sec.links = sec.links || []).push({ label: l[1], href: l[2] });
         }
         else (sec.list = sec.list || []).push(item);
