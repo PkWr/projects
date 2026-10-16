@@ -84,6 +84,9 @@ a { color: inherit; text-underline-offset: 3px; }
   display: block;
 }
 .slide[data-fit="contain"] { --fit: contain; }
+/* two portrait images side by side */
+.slide.pair { gap: 2vw; padding: 4vh 4vw; }
+.slide.pair img { width: auto; flex: 1 1 0; min-width: 0; height: 100%; object-fit: contain; }
 
 /* home page: everything in greyscale; colour arrives on the project pages */
 .home .slide { filter: grayscale(1); }

@@ -51,7 +51,7 @@
             ...s,
             // live pieces join the home rotation for a few seconds each
             ...(s.type === "embed" ? { duration: s.homeDuration || 8000 } : {}),
-            src: s.type === "embed" ? s.src : new URL(s.src, base).href,
+            src: s.type === "embed" ? s.src : (Array.isArray(s.src) ? s.src.map(x => new URL(x, base).href) : new URL(s.src, base).href),
             caption: m.label + (m.meta ? ", " + m.meta : ""),
             // keep a photo credit from the project page's caption, if it has one
             credit: /^(photo(graph(y|er|s))?|image|credit)s?\s*:/i.test(s.caption || "") ? s.caption : "",
@@ -98,10 +98,15 @@
         v.onerror = onMissing;
         slide.append(v);
       } else {
-        const img = el("img", { alt: s.alt || "", decoding: "async", loading: i < 2 ? "eager" : "lazy" });
-        img.onerror = onMissing;
-        img.src = s.src;
-        slide.append(img);
+        // "src" can be a list of two images, shown side by side (good for portraits)
+        const srcs = [].concat(s.src), alts = [].concat(s.alt || "");
+        if (srcs.length > 1) slide.classList.add("pair");
+        srcs.forEach((src, k) => {
+          const img = el("img", { alt: alts[k] || alts[0] || "", decoding: "async", loading: i < 2 ? "eager" : "lazy" });
+          img.onerror = onMissing;
+          img.src = src;
+          slide.append(img);
+        });
       }
       stage.append(slide);
       return slide;
@@ -457,9 +462,20 @@
       d.slides = md.scenes.map(s => ({ type: "embed", src: s.src, caption: s.caption, duration: dur }))
         .concat((d.slides || []).filter(s => s.type !== "embed"));
     }
-    (md.images || []).forEach(im => {
-      const sl = (d.slides || []).find(s => s.src === im.src);
-      if (sl) { if (im.alt) sl.alt = im.alt; sl.caption = im.caption; }
+    const byFile = {};
+    (md.images || []).forEach(im => { byFile[im.src] = im; });
+    (d.slides || []).forEach(sl => {
+      if (sl.type && sl.type !== "image") return;
+      if (Array.isArray(sl.src)) {
+        const found = sl.src.map(x => byFile[x]);
+        if (!found.some(Boolean)) return;
+        sl.alt = sl.src.map((x, k) => (found[k] && found[k].alt) || [].concat(sl.alt || "")[k] || "");
+        const caps = [...new Set(found.map(f => f && f.caption).filter(Boolean))];
+        sl.caption = caps.join("  ·  ");
+      } else if (byFile[sl.src]) {
+        const im = byFile[sl.src];
+        if (im.alt) sl.alt = im.alt; sl.caption = im.caption;
+      }
     });
   }
 
