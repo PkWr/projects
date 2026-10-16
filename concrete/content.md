@@ -48,6 +48,11 @@ Against that, the machinery dominates the room. The mixer's motor draws around 5
 | Event | No Bounds Festival 2025 |
 | Talk | Artist talk, Saturday 11 October, 12pm |
 
+## Themes
+
+- [Working Backwards](../themes/working-backwards/) Generative craft to physical craft
+- [Energy & Sustainability](../themes/energy-and-sustainability/)
+
 ## Credits
 
 | | |

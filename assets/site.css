@@ -407,16 +407,31 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
 
 /* ---------- Small screens: stack ---------- */
 @media (max-width: 860px) {
-  .project { height: auto; overflow: visible; }
-  .stage { position: relative; height: 72vh; height: 72svh; }
-  .drawer, .project.panel-hidden .drawer { position: static; display: block; transform: none; }
+  /* Phones: the image stays fixed full screen and the text panel scrolls up over it */
+  .project { height: auto; overflow: visible; --peek: 18svh; }
+  .stage { position: fixed; inset: 0; height: 100vh; height: 100svh; }
+  .drawer, .project.panel-hidden .drawer {
+    position: relative; display: block; transform: none;
+    margin-top: calc(100vh - 18vh); margin-top: calc(100svh - var(--peek));
+  }
   .strip { display: none; }
-  .project.panel-hidden .panel { background: var(--panel-bg); }
-  .panel { overflow: visible; }
-  .subnav { top: 0; margin: 0 -16px; padding: 12px 16px; }
   .zone.next { right: 0; }
-  .panel, .project.panel-hidden .panel { width: auto; visibility: visible; padding: 24px 16px 40px; }
-  .stage-bar, .project.panel-hidden .stage-bar { padding-right: 22px; }
+  .project.panel-hidden .panel { background: var(--panel-bg); }
+  .panel, .project.panel-hidden .panel {
+    width: auto; visibility: visible; overflow: visible;
+    min-height: calc(100svh - var(--peek));
+    padding: 28px 16px 40px;
+    box-shadow: 0 -10px 30px rgba(0,0,0,.25);
+    position: relative;
+  }
+  .panel::before {            /* small handle: there's more to scroll */
+    content: ""; position: absolute; top: 10px; left: 50%;
+    width: 36px; height: 3px; margin-left: -18px;
+    border-radius: 2px; background: var(--rule);
+  }
+  .subnav { top: 0; margin: 0 -16px; padding: 12px 16px; }
+  /* controls sit just above where the panel starts */
+  .stage-bar, .project.panel-hidden .stage-bar { padding-right: 22px; bottom: 18vh; bottom: var(--peek); }
   [data-action="panel"] { display: none; }
   .caption { display: none; }
 }

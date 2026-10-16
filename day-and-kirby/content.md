@@ -21,6 +21,8 @@ A generative dot-grid system, worked backwards into a painting.
 
 Ode to Day & Kirby is a parametric grid composition: a generative system of dots laid out across grid configurations such as 200 × 200 and 100 × 100, shaped by rules the artist sets and the randomness the system allows.
 
+The title is an ode to the designer Robin Day and the comics artist Jack Kirby.
+
 As with the other pieces in Working Backwards, the digital system came first and the traditional rendering last. The final piece is paint on a physical surface.
 
 It was made as an accompanying invitation to Origin Stories, a Comics Up Close event at Sheffield Hallam University.
@@ -37,6 +39,10 @@ It was made as an accompanying invitation to Origin Stories, a Comics Up Close e
 | Year | October 2023 |
 | Shown | Origin Stories, Comics Up Close, Sheffield Hallam University, February 2024 |
 | Strand | Working Backwards |
+
+## Themes
+
+- [Working Backwards](../themes/working-backwards/) Generative craft to physical craft
 
 ## Links
 

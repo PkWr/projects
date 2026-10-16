@@ -62,6 +62,10 @@ If a note is missing, the page falls back to the text built into its `index.html
 3. Copy `_template/Project name.md` into Obsidian as `Project Pages/<project>/<Name>.md` and write the text there.
 4. Add a line for it under `## Projects` in `Home - About.md`, then `bash publish.sh`.
 
+## Themes
+
+Theme pages live in `themes/<theme>/` (text from Obsidian `Project Pages/themes/<theme>/<Name>.md`). A theme page's background mixes images from the projects listed under its `## Projects`. Projects link to their themes from a `## Themes` section in their own note; the home note lists themes under `## Themes`.
+
 ## Publishing on GitHub Pages
 
 1. Create a repo (e.g. `PkWr/projects`) and push this folder's contents to `main`.

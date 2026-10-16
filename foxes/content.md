@@ -41,6 +41,10 @@ Foxes was the first of three pieces in Working Backwards (2023), each made as an
 | Output | Up to 106,800 variations; 3 prints |
 | Strand | Working Backwards |
 
+## Themes
+
+- [Working Backwards](../themes/working-backwards/) Generative craft to physical craft
+
 ## Credits
 
 | | |

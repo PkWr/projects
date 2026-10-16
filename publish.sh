@@ -27,6 +27,15 @@ for dir in "$VAULT"/*/; do
   [ -n "$note" ] || continue
   cp "$note" "$name/content.md" && echo "  $name  <- $(basename "$note")" && copied=$((copied+1))
 done
+# themes: Project Pages/themes/<theme>/<any>.md -> themes/<theme>/content.md
+for dir in "$VAULT"/themes/*/; do
+  [ -d "$dir" ] || continue
+  name="$(basename "$dir")"
+  [ -d "themes/$name" ] || continue
+  note="$(ls "$dir"*.md 2>/dev/null | head -n 1)"
+  [ -n "$note" ] || continue
+  cp "$note" "themes/$name/content.md" && echo "  themes/$name  <- $(basename "$note")" && copied=$((copied+1))
+done
 echo "Copied $copied note(s)."
 
 git add -A

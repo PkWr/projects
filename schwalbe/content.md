@@ -39,6 +39,10 @@ Here the traditional rendering in Working Backwards is the live gig visual. The 
 | Edition | Atomic Test 1 / Pohl edition |
 | Strand | Working Backwards |
 
+## Themes
+
+- [Working Backwards](../themes/working-backwards/) Generative craft to physical craft
+
 ## Links
 
 - [Live piece: pkwr.co/staging/flash](https://pkwr.co/staging/flash/)

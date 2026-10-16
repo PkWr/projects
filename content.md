@@ -22,6 +22,11 @@ Designer, educator and maker, Sheffield
 
 - [GD v/x AI](gd-vx-ai/) 2025–27
 
+## Themes
+
+- [Working Backwards](themes/working-backwards/)
+- [Energy & Sustainability](themes/energy-and-sustainability/)
+
 ## About
 
 Patrick Walker is a designer, educator and maker based in Sheffield. He founded the design studio dust, and leads the BA (Hons) Graphic Design course at Sheffield Hallam University.
@@ -33,11 +38,3 @@ His practice moves between typography, print and self-authored code: printmaking
 - [Archive: dust and PkWr](https://pkwr.craft.me/dust)
 - [LinkedIn](https://www.linkedin.com/in/dustcollective/)
 - [mail@pkwr.co](mailto:mail@pkwr.co)
-
-## Images
-
-<!-- `file`: description for screen readers *caption shown on the image* -->
-
-- `concrete/images/01.jpg`:  *Concrete, 2025*
-- `concrete/images/02.jpg`:  *Concrete, 2025*
-- `concrete/images/07.jpg`:  *Concrete, 2025*

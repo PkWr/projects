@@ -44,6 +44,7 @@
         const html = await (await fetch(base)).text();
         const doc = new DOMParser().parseFromString(html, "text/html");
         const pd = JSON.parse(doc.getElementById("project-data").textContent);
+        if (pd.pool) return [];                                         // a theme page, not a project
         if (pd.content) await applyMarkdown(pd, pd.content, base);   // pick up captions/credits edited in Obsidian
         return (pd.slides || [])
           .filter(s => !s.type || s.type === "image" || s.type === "embed")
@@ -188,7 +189,10 @@
       if (s.links) {
         sec.classList.add("links");
         const ul = el("ul");
-        s.links.forEach(l => ul.append(el("li", {}, el("a", { href: l.href, target: l.href.startsWith("mailto:") ? "_self" : "_blank", rel: "noopener" }, l.label))));
+        s.links.forEach(l => {
+          const external = /^https?:/i.test(l.href);
+          ul.append(el("li", {}, el("a", external ? { href: l.href, target: "_blank", rel: "noopener" } : { href: l.href }, l.label)));
+        });
         sec.append(ul);
       }
       if (s.contact) {
@@ -233,7 +237,7 @@
     window.addEventListener("scroll", markSection, { passive: true });
     window.addEventListener("resize", markSection);
     panel.append(el("footer", {},
-      data.home ? el("span", {}, "© " + new Date().getFullYear()) : el("a", { href: "../" }, "← All projects"),
+      data.home ? el("span", {}, "© " + new Date().getFullYear()) : el("a", { href: data.back || "../" }, "← All projects"),
       el("span", {}, data.credit || "Patrick Walker")));
 
     drawer.append(strip, panel);
@@ -540,7 +544,7 @@
         let l;
         if ((l = item.match(/^Related:\s*\[(.+?)\]\((.+?)\)/i))) (sec.related = sec.related || []).push({ label: l[1], href: l[2] });
         else if ((l = item.match(/^\[(.+?)\]\((.+?)\)\s*(.*)$/))) {
-          if (/projects|research|teaching/i.test(sec.title)) (sec.menu = sec.menu || []).push({ label: l[1], href: l[2], meta: l[3].trim() });
+          if (/projects|research|teaching|themes/i.test(sec.title)) (sec.menu = sec.menu || []).push({ label: l[1], href: l[2], meta: l[3].trim() });
           else (sec.links = sec.links || []).push({ label: l[1], href: l[2] });
         }
         else (sec.list = sec.list || []).push(item);
