@@ -40,6 +40,7 @@
         const html = await (await fetch(base)).text();
         const doc = new DOMParser().parseFromString(html, "text/html");
         const pd = JSON.parse(doc.getElementById("project-data").textContent);
+        if (pd.content) await applyMarkdown(pd, pd.content, base);   // pick up captions/credits edited in Obsidian
         return (pd.slides || [])
           .filter(s => !s.type || s.type === "image" || s.type === "embed")
           .map(s => ({
@@ -48,6 +49,8 @@
             ...(s.type === "embed" ? { duration: s.homeDuration || 8000 } : {}),
             src: s.type === "embed" ? s.src : new URL(s.src, base).href,
             caption: m.label + (m.meta ? ", " + m.meta : ""),
+            // keep a photo credit from the project page's caption, if it has one
+            credit: /^(photo(graph(y|er|s))?|image|credit)s?\s*:/i.test(s.caption || "") ? s.caption : "",
             href: m.href,
             project: m.href
           }));
@@ -63,7 +66,7 @@
 
   function build(data) {
     const root = document.querySelector(".project");
-    const AUTOPLAY_MS = data.autoplay === false ? 0 : (data.autoplay || 5000);
+    const AUTOPLAY_MS = data.autoplay === false ? 0 : (data.autoplay || 8000);
     const skipMissing = !!data.pool;   // on the home page, quietly skip images that don't exist yet
     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -248,7 +251,9 @@
       });
       const s = data.slides[current];
       stage.classList.toggle("has-iframe", (s.type || "image") === "embed");
-      caption.replaceChildren(s.href ? el("a", { href: s.href, class: "caption-link" }, (s.caption || "") + "  →") : (s.caption || ""));
+      caption.replaceChildren(
+        s.href ? el("a", { href: s.href, class: "caption-link" }, (s.caption || "") + "  →") : (s.caption || ""),
+        s.credit ? el("span", { class: "caption-credit" }, "  ·  " + s.credit) : "");
       updateNums();
       menuLinks.forEach(a => a.classList.toggle("is-current", a.dataset.project === s.project));
       restartTimer();
@@ -418,10 +423,10 @@
   }
   function pad(n) { return String(n).padStart(2, "0"); }
   // ---------- Markdown content ----------
-  async function applyMarkdown(d, file) {
+  async function applyMarkdown(d, file, base = location.href) {
     let src;
     try {
-      const r = await fetch(new URL(file, location.href), { cache: "no-cache" });
+      const r = await fetch(new URL(file, base), { cache: "no-cache" });
       if (!r.ok) return;
       src = await r.text();
     } catch (e) { return; }               // e.g. opened from disk: keep the built-in text
