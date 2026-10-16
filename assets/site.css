@@ -87,6 +87,11 @@ a { color: inherit; text-underline-offset: 3px; }
 /* two portrait images side by side, each filling its half of the screen (slight crop top/bottom) */
 .slide.pair { gap: 0; padding: 0; }
 .slide.pair img { width: 0; flex: 1 1 0; min-width: 0; height: 100%; object-fit: cover; }
+/* Portrait screens: stack the pair top and bottom instead of two thin slivers */
+@media (orientation: portrait) {
+  .slide.pair { flex-direction: column; }
+  .slide.pair img { width: 100%; height: 0; min-height: 0; }
+}
 
 /* home page: everything in greyscale; colour arrives on the project pages */
 .home .slide { filter: grayscale(1); }
@@ -447,6 +452,7 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
   .stage-bar, .project.panel-hidden .stage-bar { padding-right: 22px; bottom: 18vh; bottom: var(--peek); }
   [data-action="panel"] { display: none; }
   .caption { display: none; }
+  .slide.pair { bottom: 18vh; bottom: var(--peek); }  /* keep both halves clear of the panel's top edge */
 }
 
 @media (prefers-reduced-motion: reduce) {

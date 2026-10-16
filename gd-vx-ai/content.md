@@ -19,11 +19,11 @@ A Scholarship of Teaching and Learning project at Sheffield Hallam University, a
 
 ## Description
 
-Most classroom use of AI in graphic design means prompting for images, text or layouts. GD v/x AI tests an alternative: students and staff co-developing new AI tools and processes together, moving AI from tool-use into shared creative practice.
+Most classroom use of AI in graphic design means prompting for images, text or layouts. GD v/x AI tests an alternative: students and staff co-developing new AI tooling and processes together, moving AI from tool-use into shared creative practice.
 
 Concrete (2025) is its first proof of concept.
 
-At its centre is a motion app that runs in a web browser: no specialist hardware, no account, no subscription, and nothing uploaded. The same app scales from a phone to a desktop to the Igloo's six-wall Immersive Suite, and it works in real time, with no render pass. Built to run lightly, it is designed to use far less energy than a conventional render-based workflow; measuring that is part of the project.
+At its centre is motion tooling that runs in a web browser: no specialist hardware, no account, no subscription, and nothing uploaded. The same tooling scales from a phone to a desktop to the Igloo's six-wall Immersive Suite, and it works in real time, with no render pass. Built to run lightly, it is designed to use far less energy than a conventional render-based workflow; measuring that is part of the project.
 
 ## How it's made
 
@@ -31,7 +31,7 @@ It began as a background piece for a two-hour outreach workshop with college stu
 
 It has grown through use since. Pixelation, halftone, ASCII and duotone effects; 3D forms that wrap each image round a shape; a live camera layer; a second window for controls; and stage sizes for a phone, a desktop and the Igloo's six walls. Scenes can be saved as links, which is how the scenes on this page are shown. It is still plain HTML, CSS and JavaScript, around 5,000 lines, open for anyone to read.
 
-The AI is in the making, not the running. Nothing in the app is a generative model: every effect is a drawing technique, specified, tested and tuned during the build. What the AI can't supply is the direction: knowing what to ask for, in what order, and when it's right. That comes from design and print knowledge, and from years of practice. At the end of the workshop, students were given the prompt to build their own halftone tool the same way.
+The AI is in the making, not the running. Nothing in the tooling is a generative model: every effect is a drawing technique, specified, tested and tuned during the build. What the AI can't supply is the direction: knowing what to ask for, in what order, and when it's right. That comes from design and print knowledge, and from years of practice. At the end of the workshop, students were given the prompt to build their own halftone tooling the same way.
 
 ## Details
 

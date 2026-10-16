@@ -75,6 +75,20 @@
     const skipMissing = !!data.pool;   // on the home page, quietly skip images that don't exist yet
     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+    // Portrait screens (phones): pairs of portrait images, marked "fit": "contain", are shown one at a
+    // time so each is seen whole; other pairs (e.g. squares) stack top and bottom via the CSS.
+    if (window.matchMedia("(orientation: portrait)").matches) {
+      data.slides = data.slides.flatMap(s => {
+        if (!Array.isArray(s.src) || s.fit !== "contain") return [s];
+        const caps = (s.caption || "").split("  ·  ");
+        return s.src.map((src, k) => Object.assign({}, s, {
+          src, fit: undefined,
+          alt: [].concat(s.alt || "")[k] || "",
+          caption: caps.length === s.src.length ? caps[k] : s.caption,
+        }));
+      });
+    }
+
     // ---------- Build stage ----------
     const stage = el("section", { class: "stage", tabindex: "0", "aria-roledescription": "carousel", "aria-label": data.title + " images" });
 
