@@ -41,10 +41,12 @@
         const doc = new DOMParser().parseFromString(html, "text/html");
         const pd = JSON.parse(doc.getElementById("project-data").textContent);
         return (pd.slides || [])
-          .filter(s => !s.type || s.type === "image")
+          .filter(s => !s.type || s.type === "image" || s.type === "embed")
           .map(s => ({
             ...s,
-            src: new URL(s.src, base).href,
+            // live pieces join the home rotation for a few seconds each
+            ...(s.type === "embed" ? { duration: s.homeDuration || 8000 } : {}),
+            src: s.type === "embed" ? s.src : new URL(s.src, base).href,
             caption: m.label + (m.meta ? ", " + m.meta : ""),
             href: m.href,
             project: m.href
@@ -114,7 +116,7 @@
     const controls = el("div", { class: "controls" }, prevNum, curNum, nextNum, playBtn, fullBtn);
     const stageBar = el("div", { class: "stage-bar" }, caption, controls);
     stage.append(stageBar);
-    if (data.slides.length < 2) prevNum.hidden = nextNum.hidden = playBtn.hidden = true;
+    if (data.slides.length < 2) prevNum.hidden = curNum.hidden = nextNum.hidden = playBtn.hidden = true;
 
     // ---------- Build panel ----------
     const drawer = el("aside", { class: "drawer", "aria-label": data.home ? "Menu and biography" : "Project information" });
@@ -266,9 +268,10 @@
     function restartTimer() {
       clearTimeout(timer);
       const s = data.slides[current];
-      // don't auto-advance away from live embeds or videos
-      if (!s || !playing || (s.type && s.type !== "image")) return;
-      timer = setTimeout(() => show(current + 1), AUTOPLAY_MS);
+      if (!s || !playing) return;
+      // live embeds and videos stay put unless they're given their own "duration"
+      if (s.type && s.type !== "image" && !s.duration) return;
+      timer = setTimeout(() => show(current + 1), s.duration || AUTOPLAY_MS);
     }
 
     function setPlaying(p) {

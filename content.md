@@ -14,6 +14,8 @@ Designer, educator and maker, Sheffield
 ## Projects
 
 - [Concrete](concrete/) 2025
+- [From the Crypts of Fuchs to the Folds of Schwalbe](schwalbe/) 2023
+- [Ode to Day & Kirby](day-and-kirby/) 2023
 - [Foxes](foxes/) 2023
 
 ## About

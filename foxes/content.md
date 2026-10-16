@@ -42,6 +42,8 @@ Foxes was the first of three pieces in Working Backwards (2023), each made as an
 ## Links
 
 - [Live piece: foxes.pkwr.co](https://foxes.pkwr.co)
+- Related: [Ode to Day & Kirby, 2023](../day-and-kirby/)
+- Related: [From the Crypts of Fuchs to the Folds of Schwalbe, 2023](../schwalbe/)
 - Related: [Concrete, 2025](../concrete/)
 
 ## Images
