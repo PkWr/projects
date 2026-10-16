@@ -23,7 +23,15 @@ Most classroom use of AI in graphic design means prompting for images, text or l
 
 Concrete (2025) is its first proof of concept.
 
-At its centre is a motion app that isn't gate-kept behind hardware, digital sovereignty or subscription, and that runs on a fraction of the energy of conventional motion tools. It works on a phone, a desktop and in the Igloo, and it is instant: there is no render time.
+At its centre is a motion app that runs in a web browser: no specialist hardware, no account, no subscription, and nothing uploaded. The same app scales from a phone to a desktop to the Igloo's six-wall Immersive Suite, and it works in real time, with no render pass. Built to run lightly, it is designed to use far less energy than a conventional render-based workflow; measuring that is part of the project.
+
+## How it's made
+
+It began as a background piece for a two-hour outreach workshop with college students in July 2026: a single web page that took the photos students shot during the session and remixed them live on the wall while they worked on paste-ups by hand. The first version was built in under a week, by Patrick Walker working with an AI coding assistant to a fixed written brief: three files, no server, no login, and a set of seed images so it would still run if the wifi failed.
+
+It has grown through use since. Pixelation, halftone, ASCII and duotone effects; 3D forms that wrap each image round a shape; a live camera layer; a second window for controls; and stage sizes for a phone, a desktop and the Igloo's six walls. Scenes can be saved as links, which is how the scenes on this page are shown. It is still plain HTML, CSS and JavaScript, around 5,000 lines, open for anyone to read.
+
+The AI is in the making, not the running. Nothing in the app is a generative model: every effect is a drawing technique, specified, tested and tuned during the build. What the AI can't supply is the direction: knowing what to ask for, in what order, and when it's right. That comes from design and print knowledge, and from years of practice. At the end of the workshop, students were given the prompt to build their own halftone tool the same way.
 
 ## Details
 
@@ -42,6 +50,7 @@ At its centre is a motion app that isn't gate-kept behind hardware, digital sove
 ## Links
 
 - [Live piece: GD Remix Process](https://pkwr.github.io/GD-Remix-Process/)
+- [Source code on GitHub](https://github.com/PkWr/GD-Remix-Process)
 - Related: [Concrete, 2025](../concrete/)
 
 ## Scenes
