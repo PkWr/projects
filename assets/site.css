@@ -234,12 +234,14 @@ a { color: inherit; text-underline-offset: 3px; }
 }
 /* subtle bounce when the mouse wakes the page */
 .strip.bounce { animation: strip-bounce 750ms cubic-bezier(.3, .7, .3, 1); }
+/* the strip grows out to the left and back, staying fixed to the right-hand edge
+   (done with a solid yellow shadow, so nothing moves away from the edge) */
 @keyframes strip-bounce {
-  0%   { transform: translateX(0); }
-  30%  { transform: translateX(-12px); }
-  55%  { transform: translateX(0); }
-  75%  { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
+  0%   { box-shadow: 0 0 0 0 var(--strip),     -10px 0 30px rgba(0,0,0,.22); }
+  30%  { box-shadow: -12px 0 0 0 var(--strip), -22px 0 30px rgba(0,0,0,.22); }
+  55%  { box-shadow: 0 0 0 0 var(--strip),     -10px 0 30px rgba(0,0,0,.22); }
+  75%  { box-shadow: -5px 0 0 0 var(--strip),  -15px 0 30px rgba(0,0,0,.22); }
+  100% { box-shadow: 0 0 0 0 var(--strip),     -10px 0 30px rgba(0,0,0,.22); }
 }
 @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-4px); } }
 
