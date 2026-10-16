@@ -31,7 +31,7 @@ It began as a background piece for a two-hour outreach workshop with technical c
 
 It has grown through use since. Pixelation, halftone, ASCII and duotone effects; 3D forms that wrap each image round a shape; a live camera layer; a second window for controls; and stage sizes for a phone, a desktop and the Igloo's six walls. In October 2026 it was named Spot; Spot Room is the Igloo version, Spot Reel the showreel. Scenes can be saved as links, which is how the scenes on this page are shown. It is still plain HTML, CSS and JavaScript, with no server and no build step.
 
-The AI is in the making, not the running. Nothing in the tooling is a generative model: every effect is a drawing technique, specified, tested and tuned during the build. What the AI can't supply is the direction: knowing what to ask for, in what order, and when it's right. That comes from design and print knowledge, and from years of practice. At the end of the workshop, students were given the prompt to build their own halftone tooling the same way.
+Making it was a collaboration. Patrick Walker brought creative practice, context and insight; working with the AI elevated them, extending what could be built and how quickly. The AI is in the making, not the running: every effect is a drawing technique, not a generative model.
 
 ## Details
 
