@@ -37,3 +37,10 @@ Concrete (2025) is its first proof of concept.
 
 - [Live piece: GD Remix Process](https://pkwr.github.io/GD-Remix-Process/)
 - Related: [Concrete, 2025](../concrete/)
+
+## Scenes
+
+<!-- Each link is a live scene from the GD Remix Process app, shown in turn (15 seconds each).
+     Add one per line:  - [Scene name](link)   Remove all lines to go back to the default view. -->
+
+- [Scene 1](https://pkwr.github.io/GD-Remix-Process/?scene=zTY_NboNADITfZc4cIAGl8q1NW_USNQpV7xYs1BJ40bJESaO8e8XPNtz2m_GM1zcoCBtEOINueKsqU_jXwXqrBhRHi3KUi2nYz9IHN9XoH0RBSbYS-ALa7B7CibW07d40TS6_BpREeO4LkSm5yQKNsTRe6MRtN-dCJGc_OPZidVq_t-od9x6UpGmEvDOmnAq3Aca-LMLBns2RddJAWRzh3bq2_9SpdX67mlUKUBIHe28H9Y-JvONCtF7l51N22YLf7MT4K-gpDHw5Pptm3Zl34__SbcDBVVwYEOqG-x6LfOBapbqC0rD8xWgJGq-c8CQtKM3-zR8ZbXRS-MEZ3O9_)

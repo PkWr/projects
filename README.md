@@ -20,7 +20,7 @@ Suggested sizes: around 2400px on the long edge, JPEG quality ~80, ideally under
 
 Currently expected:
 
-- **foxes/images/**: `01–03.jpg` the three etchings (shown whole, not cropped), `04.jpg` Nodes installation view. Slide 5 embeds the live piece from foxes.pkwr.co.
+- **foxes/images/**: done, `01–11.jpg` (three prints, four generated images, plates, workshop, code detail). Opens on the live piece.
 - **concrete/images/**: done, `01–15.jpg` (festival photos by Andy Brown, then install shots).
 
 ## Slide options
@@ -51,7 +51,7 @@ cd ~/Sites/projects
 bash publish.sh "what changed"
 ```
 
-That copies the notes in, commits and pushes. Note format: `# Title`, an optional `*eyebrow*` line and a subtitle line, then `## Section` headings. Paragraphs become text, `- item` becomes a list, `| Label | Value |` rows become the details table, `- [Label](url)` becomes a link, `- Related: [Label](../project/)` a related link. On the home note, links under `## Projects` become the menu (`- [Concrete](concrete/) 2025`). Under `## Images`, each line sets an image's description and caption: `` - `images/01.jpg`: description *caption* ``.
+That copies the notes in, commits and pushes. Note format: `# Title`, an optional `*eyebrow*` line and a subtitle line, then `## Section` headings. Paragraphs become text, `- item` becomes a list, `| Label | Value |` rows become the details table, `- [Label](url)` becomes a link, `- Related: [Label](../project/)` a related link. On the home note, links under `## Projects` become the menu (`- [Concrete](concrete/) 2025`). Under `## Images`, each line sets an image's description and caption: `` - `images/01.jpg`: description *caption* ``. Under `## Scenes`, each `- [Name](link)` becomes a live slide (15 seconds each), shown before any images.
 
 If a note is missing, the page falls back to the text built into its `index.html`.
 

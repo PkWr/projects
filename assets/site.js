@@ -18,6 +18,10 @@
     play: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4.5 2.5 L13 8 L4.5 13.5 Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>',
     full: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg>'
   };
+  // Shown at the end of every project page (a page can opt out with "contact": false)
+  const CONTACT = { id: "contact", title: "Contact", contact: {
+    text: "For collaborations, enquiries and sales please contact Patrick Walker.",
+    email: "fao@pkwr.co", handle: "@PkWr" } };
   const dataEl = document.getElementById("project-data");
   if (!dataEl) return;
   const data = JSON.parse(dataEl.textContent);
@@ -141,6 +145,7 @@
       data.links && data.links.length ? { id: "links", title: data.linksTitle || "Links", links: data.links } : null,
       data.related && data.related.length ? { id: "related", title: "Related", related: data.related } : null
     ].filter(Boolean);
+    if (!data.home && data.contact !== false && !sections.some(s => s.id === "contact")) sections.push(CONTACT);
 
     let menuLinks = [];
     const subnavLinks = [];
@@ -180,6 +185,12 @@
         const ul = el("ul");
         s.links.forEach(l => ul.append(el("li", {}, el("a", { href: l.href, target: l.href.startsWith("mailto:") ? "_self" : "_blank", rel: "noopener" }, l.label))));
         sec.append(ul);
+      }
+      if (s.contact) {
+        sec.append(el("p", {}, s.contact.text));
+        sec.append(el("p", { class: "contact-line" },
+          el("a", { href: "mailto:" + s.contact.email }, s.contact.email),
+          s.contact.handle ? "  ·  " + s.contact.handle : ""));
       }
       if (s.related) {
         sec.classList.add("related");
@@ -440,6 +451,12 @@
       const menus = md.sections.filter(s => s.menu).flatMap(s => s.menu);
       if (menus.length) d.menu = menus;
     }
+    // "## Scenes" in a note: each link becomes a live slide, shown before any images
+    if (md.scenes && md.scenes.length) {
+      const dur = d.sceneDuration || 15000;
+      d.slides = md.scenes.map(s => ({ type: "embed", src: s.src, caption: s.caption, duration: dur }))
+        .concat((d.slides || []).filter(s => s.type !== "embed"));
+    }
     (md.images || []).forEach(im => {
       const sl = (d.slides || []).find(s => s.src === im.src);
       if (sl) { if (im.alt) sl.alt = im.alt; sl.caption = im.caption; }
@@ -449,7 +466,7 @@
   function parseMarkdown(src) {
     src = src.replace(/^\uFEFF/, "").replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, "").replace(/<!--[\s\S]*?-->/g, "");
     const out = { sections: [] };
-    let sec = null, para = [], intro = true, inImages = false;
+    let sec = null, para = [], intro = true, inImages = false, inScenes = false;
     const flush = () => {
       const p = para.join(" ").trim(); para = [];
       if (!p) return;
@@ -464,7 +481,8 @@
         flush(); intro = false;
         const title = m[1].trim();
         inImages = /^images\b/i.test(title);
-        if (inImages) { sec = null; continue; }
+        inScenes = /^(scenes|live)\b/i.test(title);
+        if (inImages || inScenes) { sec = null; continue; }
         sec = { id: slug(title), title };
         out.sections.push(sec);
         continue;
@@ -473,6 +491,14 @@
       if (intro) {
         if ((m = line.match(/^[*_](.+)[*_]$/))) out.eyebrow = m[1].trim();
         else para.push(line);
+        continue;
+      }
+      if (inScenes) {
+        // - [Scene name](https://…)   or just a bare link
+        if ((m = line.match(/^[-*]\s+\[(.+?)\]\((\S+?)\)/)) || (m = line.match(/^[-*]?\s*<?(https?:\/\/\S+?)>?$/))) {
+          const src = m[2] || m[1], caption = m[2] ? m[1].trim() : "";
+          (out.scenes = out.scenes || []).push({ src, caption });
+        }
         continue;
       }
       if (inImages) {
