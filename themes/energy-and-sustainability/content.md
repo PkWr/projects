@@ -17,6 +17,9 @@ Every piece of making has an energy cost, and digital work tends to hide its own
 
 AI enters the same question. In Concrete it was used to build the tool, not to run it: its energy is spent once, in development, set against a current discourse focused on the growing electricity and water demands of data centres.
 
+GD v/x AI carries this into teaching: a motion app that isn't gate-kept behind hardware, digital sovereignty or subscription, running on a fraction of the energy, on a phone, a desktop or in the Igloo, with no render time.
+
 ## Projects
 
 - [Concrete](../../concrete/) 2025
+- [GD v/x AI](../../gd-vx-ai/) 2025–27

@@ -23,6 +23,8 @@ Most classroom use of AI in graphic design means prompting for images, text or l
 
 Concrete (2025) is its first proof of concept.
 
+At its centre is a motion app that isn't gate-kept behind hardware, digital sovereignty or subscription, and that runs on a fraction of the energy of conventional motion tools. It works on a phone, a desktop and in the Igloo, and it is instant: there is no render time.
+
 ## Details
 
 | | |
@@ -32,6 +34,10 @@ Concrete (2025) is its first proof of concept.
 | Period | 2025 to 2027 |
 | Lead | Patrick Walker |
 | Team | Paul Allen, Georgia Burns, Matt Edgar, Jake Goodall, Muiz, Jenni Whitehead |
+
+## Themes
+
+- [Energy & Sustainability](../themes/energy-and-sustainability/)
 
 ## Links
 

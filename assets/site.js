@@ -129,6 +129,9 @@
     const controls = el("div", { class: "controls" }, prevNum, curNum, nextNum, playBtn, fullBtn);
     const stageBar = el("div", { class: "stage-bar" }, caption, controls);
     stage.append(stageBar);
+    // Way home: the PkWr mark over the image, top left (not on the home page itself)
+    const homeHref = data.back || "../";
+    if (!data.home) stage.append(el("a", { class: "home-link", href: homeHref, title: "All projects" }, "PkWr"));
     if (data.slides.length < 2) prevNum.hidden = curNum.hidden = nextNum.hidden = playBtn.hidden = true;
 
     // ---------- Build panel ----------
@@ -138,7 +141,8 @@
       el("span", { class: "strip-icon", "aria-hidden": "true" }, "+"));
     const panel = el("div", { class: "panel", id: "project-panel" });
     panel.append(el("header", {},
-      data.eyebrow ? el("p", { class: "eyebrow" }, data.eyebrow) : "",
+      data.home ? (data.eyebrow ? el("p", { class: "eyebrow" }, data.eyebrow) : "")
+        : el("p", { class: "eyebrow" }, el("a", { class: "crumb", href: homeHref }, "PkWr"), data.eyebrow ? "  /  " + data.eyebrow : ""),
       el("h1", {}, data.title),
       data.subtitle ? el("p", { class: "subtitle" }, data.subtitle) : ""));
 
@@ -237,7 +241,7 @@
     window.addEventListener("scroll", markSection, { passive: true });
     window.addEventListener("resize", markSection);
     panel.append(el("footer", {},
-      data.home ? el("span", {}, "© " + new Date().getFullYear()) : el("a", { href: data.back || "../" }, "← All projects"),
+      data.home ? el("span", {}, "© " + new Date().getFullYear()) : el("a", { href: homeHref }, "← All projects"),
       el("span", {}, data.credit || "Patrick Walker")));
 
     drawer.append(strip, panel);
