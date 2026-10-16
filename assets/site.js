@@ -18,7 +18,7 @@
     play: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4.5 2.5 L13 8 L4.5 13.5 Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>',
     full: '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg>'
   };
-  // Shown at the end of every project page (a page can opt out with "contact": false)
+  // Shown at the end of the home page only
   const CONTACT = { id: "contact", title: "Contact", contact: {
     text: "For collaborations, enquiries and sales please contact Patrick Walker.",
     email: "fao@pkwr.co", handle: "@PkWr" } };
@@ -151,7 +151,7 @@
       data.links && data.links.length ? { id: "links", title: data.linksTitle || "Links", links: data.links } : null,
       data.related && data.related.length ? { id: "related", title: "Related", related: data.related } : null
     ].filter(Boolean);
-    if (!data.home && data.contact !== false && !sections.some(s => s.id === "contact")) sections.push(CONTACT);
+    if (data.home && data.contact !== false && !sections.some(s => s.id === "contact")) sections.push(CONTACT);
 
     let menuLinks = [];
     const subnavLinks = [];

@@ -37,4 +37,3 @@ His practice moves between typography, print and self-authored code: printmaking
 
 - [Archive: dust and PkWr](https://pkwr.craft.me/dust)
 - [LinkedIn](https://www.linkedin.com/in/dustcollective/)
-- [mail@pkwr.co](mailto:mail@pkwr.co)
