@@ -49,3 +49,24 @@ Here the traditional rendering in Working Backwards is the live gig visual. The 
 - Related: [Foxes, 2023](../foxes/)
 - Related: [Ode to Day & Kirby, 2023](../day-and-kirby/)
 - Related: [Concrete, 2025](../concrete/)
+
+## Images
+
+<!-- `file`: description for screen readers *caption shown on the image*. Images are shown in pairs: 01+02, 03+04 ... -->
+
+- `images/01.jpg`: The eye: a radial burst round a dark pupil, with white brush lettering, on black *Atomic Test 1 / Pohl edition*
+- `images/02.jpg`: Pohl playing beneath the projection, headed Areas offering protection possibilities against flash blindness *Live, Strident Nights*
+- `images/03.jpg`: The eye over brush lettering and a temperature chart *Atomic Test 1 / Pohl edition*
+- `images/04.jpg`: Green and black lines converging on a dark pupil *Atomic Test 1 / Pohl edition*
+- `images/05.jpg`: The eye over a recovery-time graph from a flash blindness study *Atomic Test 1 / Pohl edition*
+- `images/06.jpg`: Guitarist and drummer under the projected eye, with fairy lights and a red lamp *Live, Strident Nights*
+- `images/07.jpg`: The eye over a chart of fireball luminance against time *Atomic Test 1 / Pohl edition*
+- `images/08.jpg`: Dark radial lines over a list of aviation tasks *Atomic Test 1 / Pohl edition*
+- `images/09.jpg`: The eye and brush lettering, tinted green *Atomic Test 1 / Pohl edition*
+- `images/10.jpg`: The eye over a chart headed Illuminance from fireball *Atomic Test 1 / Pohl edition*
+- `images/11.jpg`: Dense grey radial lines over the fireball chart *Atomic Test 1 / Pohl edition*
+- `images/12.jpg`: The audience and band beneath the projected eye *Live, Strident Nights*
+- `images/13.jpg`: Brush lettering curling round a dark pupil *Atomic Test 1 / Pohl edition*
+- `images/14.jpg`: A white radial burst with brush lettering *Atomic Test 1 / Pohl edition*
+- `images/15.jpg`: The drum kit lit by the projection in green, red and blue *Live, Strident Nights*
+- `images/16.jpg`: The eye with brush lettering and green chart text, Visual angle, log minutes *Atomic Test 1 / Pohl edition*
