@@ -10,6 +10,13 @@
 }
 @font-face {
   font-family: "IBM Plex Mono";
+  font-style: normal;          /* upright Light: used only for the hover on menu items */
+  font-weight: 300;
+  font-display: swap;
+  src: url("fonts/ibm-plex-mono-latin-300-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
   font-style: italic;
   font-weight: 400;
   font-display: swap;
@@ -370,12 +377,12 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
   padding: 10px 6px;
   margin: 0 -6px;
   text-decoration: none;
-  transition: background-color 200ms ease;
 }
 .menu .menu-label { font-size: 24px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.05; }
 .menu .menu-meta { font-size: 12px; color: var(--muted); }
 .menu a.ext .menu-label::after { content: " \2197"; font-size: 16px; }
-.menu a:hover, .menu a:focus-visible { background: var(--strip); outline: none; }
+.menu a:hover .menu-label, .menu a:focus-visible .menu-label { font-style: normal; }  /* hover: italic to upright */
+.menu a:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
 .menu a.is-current .menu-label::after { content: " \2190"; font-weight: 400; font-size: 16px; }
 .home .panel header { margin-bottom: -8px; }
 
