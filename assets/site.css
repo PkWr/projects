@@ -374,6 +374,7 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
 }
 .menu .menu-label { font-size: 24px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.05; }
 .menu .menu-meta { font-size: 12px; color: var(--muted); }
+.menu a.ext .menu-label::after { content: " \2197"; font-size: 16px; }
 .menu a:hover, .menu a:focus-visible { background: var(--strip); outline: none; }
 .menu a.is-current .menu-label::after { content: " \2190"; font-weight: 400; font-size: 16px; }
 .home .panel header { margin-bottom: -8px; }

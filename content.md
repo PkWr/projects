@@ -27,6 +27,10 @@ Designer, educator and maker, Sheffield
 - [Working Backwards](themes/working-backwards/)
 - [Energy & Sustainability](themes/energy-and-sustainability/)
 
+## dust
+
+- [Where Bombs Fell](where-bombs-fell/) 2016
+
 ## About
 
 Patrick Walker is a designer, educator and maker based in Sheffield. He founded the design studio dust, and leads the BA (Hons) Graphic Design course at Sheffield Hallam University.

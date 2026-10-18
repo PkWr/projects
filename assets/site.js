@@ -197,7 +197,9 @@
         sec.classList.add("menu");
         const ul = el("ul");
         s.menu.forEach(m => {
-          const a = el("a", { href: m.href }, el("span", { class: "menu-label" }, m.label), m.meta ? el("span", { class: "menu-meta" }, m.meta) : "");
+          const ext = /^https?:/i.test(m.href);   // e.g. the dust archive: opens in a new tab, marked with an arrow
+          const a = el("a", ext ? { href: m.href, target: "_blank", rel: "noopener", class: "ext" } : { href: m.href },
+            el("span", { class: "menu-label" }, m.label), m.meta ? el("span", { class: "menu-meta" }, m.meta) : "");
           a.dataset.project = m.href;
           menuLinks.push(a);
           ul.append(el("li", {}, a));
@@ -475,7 +477,7 @@
     if (md.sections.length) {
       d.sections = md.sections;
       // every menu group (e.g. Projects, Research & teaching) feeds the home rotation
-      const menus = md.sections.filter(s => s.menu).flatMap(s => s.menu);
+      const menus = md.sections.filter(s => s.menu).flatMap(s => s.menu).filter(m => !/^https?:/i.test(m.href));
       if (menus.length) d.menu = menus;
     }
     // "## Scenes" in a note: each link becomes a live slide, shown before any images
@@ -562,7 +564,7 @@
         let l;
         if ((l = item.match(/^Related:\s*\[(.+?)\]\((.+?)\)/i))) (sec.related = sec.related || []).push({ label: l[1], href: l[2] });
         else if ((l = item.match(/^\[(.+?)\]\((.+?)\)\s*(.*)$/))) {
-          if (/projects|research|teaching|themes/i.test(sec.title)) (sec.menu = sec.menu || []).push({ label: l[1], href: l[2], meta: l[3].trim() });
+          if (/projects|research|teaching|themes|dust/i.test(sec.title)) (sec.menu = sec.menu || []).push({ label: l[1], href: l[2], meta: l[3].trim() });
           else (sec.links = sec.links || []).push({ label: l[1], href: l[2] });
         }
         else (sec.list = sec.list || []).push(item);
