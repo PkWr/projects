@@ -27,7 +27,9 @@ Designer, educator and maker, Sheffield
 - [Working Backwards](themes/working-backwards/)
 - [Energy & Sustainability](themes/energy-and-sustainability/)
 
-## dust
+## dust (2000–2020)
+
+Patrick Walker, Founder & Creative Director
 
 Selected projects (in progress)
 
