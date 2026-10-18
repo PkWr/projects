@@ -49,7 +49,7 @@ The roundels have weathered into the streets since, gathering verdigris and wear
 | | |
 |---|---|
 | Created by | Matthew Edgar |
-| Design | dust (Patrick Walker) |
+| Design | dust |
 | Thanks | Sheffield City Libraries |
 
 ## Links
