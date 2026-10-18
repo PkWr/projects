@@ -29,6 +29,8 @@ Designer, educator and maker, Sheffield
 
 ## dust
 
+Selected projects (in progress)
+
 - [Where Bombs Fell](where-bombs-fell/) 2016
 
 ## About
