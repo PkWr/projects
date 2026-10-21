@@ -45,7 +45,7 @@ Here the traditional rendering in Working Backwards is the live gig visual. The 
 
 ## Links
 
-- [Live piece: fuchs.pkwr.co](https://fuchs.pkwr.co/)
+- [Live piece: pkwr.co/schwalbe/live](https://pkwr.co/schwalbe/live/)
 - Related: [Foxes, 2023](../foxes/)
 - Related: [Ode to Day & Kirby, 2023](../day-and-kirby/)
 - Related: [Concrete, 2025](../concrete/)

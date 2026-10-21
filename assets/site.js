@@ -490,10 +490,10 @@
     return n;
   }
   // Links to other sites open in a new tab. Our own two sites (PkWr and dust) open in place.
-  // Note: pkwr.co/staging/... and the *.pkwr.co live pieces are separate pieces, so they still count as external.
+  // Note: pkwr.co/staging/..., .../live/ pieces and the *.pkwr.co live pieces are separate pieces, so they still count as external.
   function isExternal(href) {
     if (!/^https?:/i.test(href)) return false;
-    return !/^https?:\/\/(pkwr\.github\.io\/(projects|dust)|(www\.)?du\.st|(www\.)?pkwr\.co)(\/|$)/i.test(href) || /pkwr\.co\/staging\//i.test(href);
+    return !/^https?:\/\/(pkwr\.github\.io\/(projects|dust)|(www\.)?du\.st|(www\.)?pkwr\.co)(\/|$)/i.test(href) || /pkwr\.co\/(staging\/|[^?#]*\/live\/)/i.test(href);
   }
 
   function pad(n) { return String(n).padStart(2, "0"); }

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>*From the crypts of Fuchs to the folds of Schwalbe*</title>
+	<meta name="author" content="Patrick Walker" />
+	<meta name="description" content="Ode to Day & Kirby" />
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&family=Jost:ital,wght@0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/style-flash.css" />
+</head>
+<body>
+<script>
+/*
+	Static version of flash.php (2023), for hosting without PHP.
+	The PHP rolled random numbers and wrote HTML on the server, refreshing every 5 seconds.
+	This does the same rolls in the browser and redraws every 5 seconds.
+	Ported as written: same ranges, same layers, same markup.
+*/
+(function () {
+	const REFRESH = 5000;
+	const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min; // PHP rand(): inclusive
+
+	const width = 1920, height = 1080;   // full HD frame
+	const daytime_flash = 21, nighttime_flash = 53, pupil_multiplier = 1.2;
+
+	function Scrap() { return "scrap-" + rand(1, 50) + ".png"; }
+
+	function Blend() {
+		switch (rand(1, 3)) {
+			case 1: return "screen";
+			case 2: return "exclusion";
+			default: return "multiply";
+		}
+	}
+
+	function Eye(pupil_min, pupil_max) {
+		let h = "";
+		if (rand(1, 2) === 1) h += "<style>svg { filter: invert(100%); }</style>";
+		h += `<svg class='ink' viewBox='0 0 ${width} ${height}'>`;
+
+		// Iris
+		const iris = rand(1100, 1300) / 4;
+		const stroma = iris * 2;
+		h += `<circle class='iris' cx='50%' cy='50%' r='${iris}' fill='white'/>`;
+
+		// Stroma: 201 rays round the centre (the PHP loop ran 0 to 200 inclusive)
+		let stroma_rotate = 0, css = "";
+		for (let stroma_count = 0; stroma_count <= 200; stroma_count++) {
+			const stroma_height = rand(10, 25);
+			const stroma_growth = rand(1, 2000);
+			// the PHP re-declared these keyframes each pass, so the last one wins
+			css = `@keyframes stroma-grow { from { width: ${stroma_growth}; opacity: 0.8; } to { width: ${stroma}; opacity: 0.1; } }
+				.stroma { animation: stroma-grow 3s ease-in forwards 1; }`;
+			h += `<rect class='stroma' x='50%' y='50%' width='${stroma}' height='${stroma_height}' transform-origin='center' transform='rotate(${stroma_rotate})'></rect>`;
+			stroma_rotate += 360 / 200;
+		}
+		h = `<style>${css}</style>` + h;
+
+		// Pupil
+		let pupil = rand(pupil_min, pupil_max) / 4;
+		h += `<defs><radialGradient id='bleached-gradient'>
+				<stop offset='0%' stop-color='black' />
+				<stop offset='98%' stop-color='white' />
+			</radialGradient></defs>`;
+		h += `<circle class='pupil-bleached' cx='50%' cy='50%' r='${pupil}' transform-origin='center' fill='url(#bleached-gradient)'/>`;
+
+		// Unbleached eye fades out, with a 1px bleed
+		pupil += 1;
+		h += `<circle class='pupil' cx='50%' cy='50%' transform-origin='center' r='${pupil}'/>`;
+		return h + "</svg>";
+	}
+
+	function compose() {
+		let h = "";
+		let flash_distance, pupil_min, pupil_max, background_color;
+
+		if (rand(0, 1) === 1) {
+			// Day time
+			flash_distance = daytime_flash;
+			pupil_min = 200 * pupil_multiplier;
+			pupil_max = 400 * pupil_multiplier;
+			background_color = `rgb(0, ${rand(220, 255)}, 0)`;
+		} else {
+			// Night time
+			flash_distance = nighttime_flash;
+			pupil_min = 400 * pupil_multiplier;
+			pupil_max = 800 * pupil_multiplier;
+			background_color = "rgb(0, 0, 0)";
+		}
+		h += `<style>body { background-color: ${background_color}; }
+			.frame-1, .frame-2, .frame-3 { mix-blend-mode: ${Blend()}; }</style>`;
+
+		// Scrap layers (composition 2: three layers)
+		h += `<div class='frame-1' style='background: url(images/${Scrap()}) repeat 0 0; background-size: ${rand(1000, 2500)}px;'></div>`;
+		h += `<div class='frame-2' style='background: url(images/${Scrap()}) no-repeat ${rand(-200, 800)}px ${rand(-100, 800)}px; background-size: ${rand(500, 800)}px;'></div>`;
+		h += `<div class='frame-3' style='background: url(images/${Scrap()}) no-repeat ${rand(-200, 800)}px ${rand(-200, 800)}px; background-size: ${rand(500, 800)}px;'></div>`;
+
+		// Pohl
+		h += `<div class='pohl' style='background: url(images/pohl/pohl_1.png) no-repeat ${rand(-200, 500)}px ${rand(-200, 500)}px; background-size: ${rand(500, 2000)}px;'></div>`;
+
+		// One eye, centred (layout 1)
+		h += Eye(pupil_min, pupil_max);
+
+		return h;
+	}
+
+	const piece = document.createElement("div");
+	piece.id = "piece";
+	document.body.appendChild(piece);
+
+	// Each new composition waits until its images have loaded, then swaps in whole
+	// (the PHP version reloaded the page and let images pop in as they arrived).
+	const load = src => new Promise(done => { const i = new Image(); i.onload = i.onerror = done; i.src = src; });
+	function prepare() {
+		const h = compose();
+		const srcs = [...h.matchAll(/url\((images\/[^)]+)\)/g)].map(m => m[1]);
+		return Promise.all(srcs.map(load)).then(() => h);
+	}
+	const wait = ms => new Promise(done => setTimeout(done, ms));
+	async function run() {
+		let ready = prepare();
+		while (true) {
+			piece.innerHTML = await ready;
+			ready = prepare();                       // load the next one while this one shows
+			await Promise.all([ready, wait(REFRESH)]);
+		}
+	}
+	run();
+})();
+</script>
+</body>
+</html>
