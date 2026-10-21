@@ -11,6 +11,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&family=Jost:ital,wght@0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="assets/style-dots.css" />
+	<script src="assets/speed.js"></script>
 	<style>html, body { height: 100%; } /* the PHP page had no doctype, so browsers sized it this way anyway */</style>
 </head>
 <body>
@@ -83,8 +84,10 @@
 		document.body.insertAdjacentHTML("beforeend", bendaydots());   // straight into <body>, as before
 		if (old) old.remove();
 	}
-	draw();
-	setInterval(draw, REFRESH);
+	// Speed bar: 10 min as made; from 2 s to 20 min
+	const speed = SpeedBar({ value: REFRESH, min: 2000, max: 1200000, key: "dots-every" });
+	draw(); speed.shown();
+	setInterval(() => { if (speed.due()) { draw(); speed.shown(); } }, 100);
 })();
 </script>
 </body>
