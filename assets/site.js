@@ -215,7 +215,7 @@
         s.menu.forEach(m => {
           const ext = isExternal(m.href);   // other sites open in a new tab, marked with an arrow
           const a = el("a", ext ? { href: m.href, target: "_blank", rel: "noopener", class: "ext" } : { href: m.href },
-            el("span", { class: "menu-label" }, m.label), m.meta ? el("span", { class: "menu-meta" }, m.meta) : "");
+            el("span", { class: "menu-label" }, ...lines(m.label)), m.meta ? el("span", { class: "menu-meta" }, m.meta) : "");
           a.dataset.project = m.href;
           menuLinks.push(a);
           ul.append(el("li", {}, a));
@@ -472,6 +472,10 @@
   }
 
   // ---------- helpers ----------
+  // A label can break onto a new line with <br>, e.g. "Selected projects<br>2000–2020"
+  function lines(text) {
+    return String(text).split(/<br\s*\/?>/i).flatMap((t, i) => i ? [document.createElement("br"), t] : [t]);
+  }
   function el(tag, attrs = {}, ...kids) {
     const n = document.createElement(tag);
     for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);

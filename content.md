@@ -29,7 +29,7 @@ Designer, educator and maker, Sheffield
 
 ## dust
 
-- [Selected projects, 2000–2020](dust/)
+- [Selected projects<br>2000–2020](dust/)
 
 ## About
 

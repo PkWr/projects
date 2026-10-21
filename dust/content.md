@@ -32,7 +32,7 @@ Patrick Walker, Founder & Creative Director
 
 ## PkWr
 
-- [Selected projects, 2020–](../)
+- [Selected projects<br>2020–](../)
 
 ## About
 
