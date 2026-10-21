@@ -13,6 +13,7 @@
   home page stays in sync as projects are added or changed.
 */
 (async function () {
+  const ASSETS = new URL(".", document.currentScript ? document.currentScript.src : location.href).href;   // .../assets/
   // ---------- Analytics ----------
   // GoatCounter: free, privacy-friendly page counts, no cookies (so no consent banner needed).
   // Dashboard: https://pkwr.goatcounter.com  -  set to "" to switch analytics off.
@@ -280,6 +281,12 @@
     root.append(stage, drawer);
     root.classList.add("panel-hidden");
     if (data.theme) root.classList.add("theme-" + data.theme);   // e.g. "dust": red in place of yellow
+    // Favicon: a yellow square for PkWr, a red square for dust
+    const iconName = data.theme === "dust" ? "dust" : "pkwr";
+    document.querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"]').forEach(l => l.remove());
+    document.head.append(
+      el("link", { rel: "icon", href: ASSETS + "favicon-" + iconName + ".ico", sizes: "any" }),
+      el("link", { rel: "apple-touch-icon", href: ASSETS + "apple-touch-icon-" + iconName + ".png" }));
     requestAnimationFrame(markSection);
 
     // ---------- Behaviour ----------
