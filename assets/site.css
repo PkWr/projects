@@ -216,6 +216,9 @@ a { color: inherit; text-underline-offset: 3px; }
      which is built on Chrome) don't repaint a scrolling element's background during a fade,
      which left the panel white while the section menu band turned yellow/red */
   background: var(--panel-bg);
+  /* the shadow is cast from the drawer's outer edge, so it only ever falls on the image
+     (on the strip it showed through onto the panel) */
+  box-shadow: -10px 0 30px rgba(0,0,0,.22);
   transition: transform 450ms var(--slide-ease), background-color 700ms ease 120ms;
 }
 .project.panel-hidden .drawer {
@@ -241,7 +244,6 @@ a { color: inherit; text-underline-offset: 3px; }
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  box-shadow: -10px 0 30px rgba(0,0,0,.22);
   transition: background-color 700ms ease 120ms;
 }
 .project.panel-hidden .strip:hover { background: var(--strip-hover); }
@@ -271,11 +273,11 @@ a { color: inherit; text-underline-offset: 3px; }
 /* the strip grows out to the left and back, staying fixed to the right-hand edge
    (done with a solid yellow shadow, so nothing moves away from the edge) */
 @keyframes strip-bounce {
-  0%   { box-shadow: 0 0 0 0 var(--strip),     -10px 0 30px rgba(0,0,0,.22); }
-  30%  { box-shadow: -12px 0 0 0 var(--strip), -22px 0 30px rgba(0,0,0,.22); }
-  55%  { box-shadow: 0 0 0 0 var(--strip),     -10px 0 30px rgba(0,0,0,.22); }
-  75%  { box-shadow: -5px 0 0 0 var(--strip),  -15px 0 30px rgba(0,0,0,.22); }
-  100% { box-shadow: 0 0 0 0 var(--strip),     -10px 0 30px rgba(0,0,0,.22); }
+  0%   { box-shadow: 0 0 0 0 var(--strip); }
+  30%  { box-shadow: -12px 0 0 0 var(--strip); }
+  55%  { box-shadow: 0 0 0 0 var(--strip); }
+  75%  { box-shadow: -5px 0 0 0 var(--strip); }
+  100% { box-shadow: 0 0 0 0 var(--strip); }
 }
 @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-4px); } }
 
@@ -468,7 +470,7 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
   }
   .strip { display: none; }
   .zone.next { right: 0; }
-  .drawer, .project.panel-hidden .drawer { background: transparent; }
+  .drawer, .project.panel-hidden .drawer { background: transparent; box-shadow: none; }
   .panel, .project.panel-hidden .panel, .project.panel-hidden .subnav { background: var(--panel-bg); }
   .panel, .project.panel-hidden .panel {
     width: auto; visibility: visible; overflow: visible;
