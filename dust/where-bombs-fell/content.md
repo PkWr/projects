@@ -54,7 +54,6 @@ The roundels have weathered into the streets since, gathering verdigris and wear
 
 ## Links
 
-- [dust archive: Where Bombs Fell](https://pkwr.craft.me/dust/b/5D30D822-C93D-4E46-8A7D-787D461DC70D/Where-Bombs-Fell)
 - Related: [Concrete, 2025](../../concrete/)
 
 ## Images

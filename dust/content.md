@@ -39,7 +39,3 @@ Patrick Walker, Founder & Creative Director
 A body of work from the first twenty years of a small creative practice based in Sheffield. As such it marks the end of one thing and the beginnings of something else.
 
 A sum of its parts, we take this opportunity to document outputs along with practitioners and collaborators. Soft and sylvan — bold and abrupt.
-
-## Elsewhere
-
-- [dust archive](https://pkwr.craft.me/dust)

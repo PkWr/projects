@@ -361,9 +361,11 @@
       img.style.width = dw + "px"; img.style.height = dh + "px";
       img.style.transition = "none"; img.style.transform = t(from);
       void img.offsetWidth;                                     // start from "from", then glide
-      img.style.transition = `transform ${ms}ms cubic-bezier(.45,0,.55,1)`;
+      // hold still while it fades in, then ease in slowly and ease out the same way
+      const hold = 1500;
+      img.style.transition = `transform ${ms}ms cubic-bezier(.65,0,.35,1) ${hold}ms`;
       img.style.transform = t(to);
-      s._panMs = ms;
+      s._panMs = ms + hold;
     }
     let panResize;
     window.addEventListener("resize", () => { clearTimeout(panResize); panResize = setTimeout(() => { pan(current); restartTimer(); }, 300); });
