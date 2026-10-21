@@ -347,9 +347,13 @@ dl.meta dt { color: var(--muted); font-family: var(--mono); font-size: 11px; tex
   z-index: 2;
   margin: 0 calc(-1 * var(--gutter));
   padding: 14px var(--gutter) 12px;
-  background: inherit;                     /* follows the panel's yellow-to-white fade */
+  /* same colour and fade as the panel, set directly: "inherit" jumps straight
+     to the end colour in some browsers (Safari), flashing a yellow band on close */
+  background: var(--panel-bg);
+  transition: background-color 700ms ease 120ms;
   border-bottom: 1px solid var(--rule);
 }
+.project.panel-hidden .subnav { background: var(--strip); transition: background-color 420ms ease; }
 .subnav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; }
 .subnav a {
   font-size: 11px;
@@ -444,7 +448,7 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
   }
   .strip { display: none; }
   .zone.next { right: 0; }
-  .project.panel-hidden .panel { background: var(--panel-bg); }
+  .project.panel-hidden .panel, .project.panel-hidden .subnav { background: var(--panel-bg); }
   .panel, .project.panel-hidden .panel {
     width: auto; visibility: visible; overflow: visible;
     min-height: calc(100svh - var(--peek));
