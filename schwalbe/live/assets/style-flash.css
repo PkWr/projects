@@ -1,0 +1,239 @@
+/*HTML*/
+body {
+  font-family: 'Jost', sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  margin: 0px;
+  padding: 0px; 
+  overflow: hidden;
+  background: black;
+}
+
+.instagram-post{
+  width:1080px;
+  height:1080px;
+}
+
+p, i, h1, h2, h3, h4, h5 {
+  margin-block: 0px;
+  font-kerning: auto;
+}
+
+p {
+  color: #ffffff;
+  font-size: 2.5vh;
+  line-height: 2.5vh;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: normal;
+}
+
+i {
+  font-style: italic;
+  color: #3ea435;
+  font-size: 2.5vh;
+  line-height: 2.5vh;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+h1 {
+  font-size: 20vw;
+  line-height: 13vw;
+  color: #3da335;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -1.5vw;
+}
+
+.upper {
+  text-transform: uppercase;
+}
+
+h2 {
+  color: #3ea435;
+  font-size: 9vh;
+  line-height: 8vh;
+  font-weight: 700;
+  letter-spacing: -5;
+  padding-top: 0.3vh;
+  padding-bottom: 0.3vh;
+  padding-right: 7px;
+}
+
+h3 {
+  color: black;
+  font-size: 3vh;
+  line-height: 2.5vh;
+  font-weight: 700;
+}
+
+h4 {
+  color: black;
+  font-size: 4vh;
+  line-height: 3.7vh;
+  font-weight: bold;
+}
+
+h5 {
+    font-size: 3.2vh;
+    line-height: 3vh;
+    font-style: italic;
+    font-weight: 500;
+    padding-bottom: 5px;
+}
+
+ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.spacer-10 {
+  width:100%;
+  height: 3vh;
+}
+
+.spacer-20 {
+  width:100%;
+  height: 20px;
+}
+
+/*****************************************************************/
+
+/* Debugging */
+#console{
+  visibility: hidden;
+  min-width: 300px;
+  opacity: 70%;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 14px;
+  line-height: 16px;
+  font-family: 'IBM Plex Mono', monospace;  background: #7d7d7d;
+  padding: 20px;
+  color: white;
+}
+div {
+ /*border: 1px dotted white;*/
+}
+
+/*****************************************************************/
+
+/*Animation*/
+@keyframes pupil-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes stroma-fade {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 0.1;
+  }
+}
+
+@keyframes scrap-book {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.1;
+  }
+}
+/*****************************************************************/
+
+/* Frame */ 
+
+.ink {
+  width:100%;
+  height: 100%;
+}
+
+.frame-1 {
+  z-index: -1;
+  position: fixed;
+  width:100%;
+  height:100%;
+v
+}
+
+.frame-2 {
+  z-index: -2;
+  position: fixed;
+  width:100%;
+  height:100%;
+}
+
+.frame-3 {
+  z-index: -3;
+  position: fixed;
+  width:100%;
+  height:100%;
+}
+
+.pohl {
+  z-index: -1;
+  position: fixed;
+  width:100%;
+  height:100%;
+  mix-blend-mode: screen;
+  filter: invert(1);
+}
+
+
+/*****************************************************************/
+
+/* Eyes */ 
+.pupil {
+  fill: rgb(0, 0, 0) !important;
+  animation: pupil-fade 5s ease-in forwards 1;
+}
+
+.pupil-bleached{
+  /*fill: rgb(255, 0, 0) !important;*/
+}
+
+.iris {
+
+}
+
+.stroma {
+}
+
+.both-eyes {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -350px;
+ }
+ 
+.left-eye {
+  width: fit-content;
+  height: fit-content;
+  background: greenyellow;
+  float: left;
+  margin-right:100px;
+}
+
+.right-eye {
+  width: fit-content;
+  height: fit-content;
+  background: greenyellow;
+  float: left;
+}
+
+/*****************************************************************/
+
+
+#info {
+  visibility: visible;
+}
