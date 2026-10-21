@@ -439,10 +439,9 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
 .stage-logo {
   position: absolute; z-index: 3; top: 50%;
   left: calc((100% - var(--panel-w) - var(--strip-w)) / 2);
-  width: clamp(110px, 20vmin, 220px); aspect-ratio: 1;
+  width: clamp(330px, 60vmin, 660px); aspect-ratio: 1;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  filter: drop-shadow(0 0 16px rgba(0,0,0,.35));   /* keeps it readable over pale images */
   transition: left 450ms var(--slide-ease);
 }
 .project.panel-hidden .stage-logo { left: calc((100% - var(--strip-w)) / 2); transition: left 450ms var(--slide-ease) 260ms; }
