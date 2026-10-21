@@ -327,8 +327,46 @@
         s.credit ? el("span", { class: "caption-credit" }, "  ·  " + s.credit) : "");
       updateNums();
       menuLinks.forEach(a => a.classList.toggle("is-current", a.dataset.project === s.project));
+      pan(current);
       restartTimer();
     }
+
+    // ---------- Slow pans for wide or tall images ----------
+    // A single image noticeably wider or taller than the screen (more than 1.1x off) fills the screen
+    // and glides slowly from one end to the other while it shows, instead of sitting letterboxed.
+    // "fit": "pan" forces it; "pan": false turns it off for a slide. Alternates direction each time.
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function pan(idx) {
+      const slide = slides[idx], s = data.slides[idx];
+      const img = slide.querySelector("img");
+      s._panMs = 0;
+      const clear = () => { delete slide.dataset.pan; if (img) { img.style.width = img.style.height = img.style.transform = img.style.transition = ""; } };
+      if (!img || slide.classList.contains("pair") || (s.type && s.type !== "image") || s.pan === false || reduceMotion.matches) return clear();
+      if (!img.naturalWidth) {   // not loaded yet: try again once it is
+        img.addEventListener("load", () => { if (current === idx) { pan(idx); restartTimer(); } }, { once: true });
+        return clear();
+      }
+      const W = stage.clientWidth, H = stage.clientHeight;
+      const ar = img.naturalWidth / img.naturalHeight, sr = W / H;
+      const off = ar > sr ? ar / sr : sr / ar;
+      if (s.fit !== "pan" && off < 1.1) return clear();
+      const across = ar > sr;                                   // pan sideways, or else up/down
+      const dw = across ? H * ar : W, dh = across ? H : W / ar;
+      const over = Math.max(0, across ? dw - W : dh - H);
+      slide._panDir = slide._panDir === 1 ? -1 : 1;
+      const from = slide._panDir === 1 ? 0 : -over, to = slide._panDir === 1 ? -over : 0;
+      const ms = Math.round(Math.min(30000, Math.max(14000, over / 30 * 1000)));   // about 30px a second
+      const t = v => across ? `translate3d(${v}px,0,0)` : `translate3d(0,${v}px,0)`;
+      slide.dataset.pan = across ? "x" : "y";
+      img.style.width = dw + "px"; img.style.height = dh + "px";
+      img.style.transition = "none"; img.style.transform = t(from);
+      void img.offsetWidth;                                     // start from "from", then glide
+      img.style.transition = `transform ${ms}ms cubic-bezier(.45,0,.55,1)`;
+      img.style.transform = t(to);
+      s._panMs = ms;
+    }
+    let panResize;
+    window.addEventListener("resize", () => { clearTimeout(panResize); panResize = setTimeout(() => { pan(current); restartTimer(); }, 300); });
 
     // manual moves (clicks, keys, swipes) use a quick fade; autoplay uses the slow ambient one
     function go(i, dir = 1) { stage.classList.add("quick"); show(i, dir); }
@@ -350,7 +388,7 @@
       if (!s || !playing) return;
       // live embeds and videos stay put unless they're given their own "duration"
       if (s.type && s.type !== "image" && !s.duration) return;
-      timer = setTimeout(() => { stage.classList.remove("quick"); show(current + 1); }, s.duration || AUTOPLAY_MS);
+      timer = setTimeout(() => { stage.classList.remove("quick"); show(current + 1); }, s._panMs || s.duration || AUTOPLAY_MS);
     }
 
     function setPlaying(p) {

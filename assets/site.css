@@ -111,7 +111,9 @@ a { color: inherit; text-underline-offset: 3px; }
 /* very slow drift on photographs while they're showing (artworks shown whole stay still);
    the image holds its zoom while fading out, then quietly resets */
 .slide img { transform: scale(1); transform-origin: center; transition: transform 0s linear var(--fade); }
-.slide.is-active:not([data-fit="contain"]) img { transform: scale(1.06); transition: transform var(--drift) linear; }
+.slide.is-active:not([data-fit="contain"]):not([data-pan]) img { transform: scale(1.06); transition: transform var(--drift) linear; }
+/* wide or tall images: sized to fill the screen and panned by site.js (see pan()) */
+.slide[data-pan] img { position: absolute; left: 0; top: 0; max-width: none; max-height: none; object-fit: cover; will-change: transform; }
 .slide iframe {
   width: 100%;
   height: 100%;
