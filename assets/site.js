@@ -28,7 +28,7 @@
   // Text can live in a Markdown file next to the page (copied from Obsidian); it overrides the built-in text.
   if (data.content) await applyMarkdown(data, data.content);
   if (data.pool) {
-    const pooled = await gatherPool(data.menu || []);
+    const pooled = await gatherPool(data.menu || [], data.poolPerProject);
     // fall back to the page's own "slides" if the projects can't be read
     // (e.g. when index.html is opened straight from disk rather than via a web server)
     if (pooled.length) data.slides = pooled;
@@ -37,7 +37,7 @@
   build(data);
 
   // Fetch each project page, read its slide list, and pool the still images.
-  async function gatherPool(menu) {
+  async function gatherPool(menu, perProject) {
     const lists = await Promise.all(menu.map(async m => {
       try {
         const base = new URL(m.href, location.href);
@@ -48,6 +48,7 @@
         if (pd.content) await applyMarkdown(pd, pd.content, base);   // pick up captions/credits edited in Obsidian
         return (pd.slides || [])
           .filter(s => !s.type || s.type === "image" || s.type === "embed")
+          .slice(0, perProject || Infinity)          // e.g. dust home: a few images from each project
           .map(s => ({
             ...s,
             // live pieces join the home rotation for a few seconds each
@@ -266,6 +267,7 @@
     drawer.append(strip, panel);
     root.append(stage, drawer);
     root.classList.add("panel-hidden");
+    if (data.theme) root.classList.add("theme-" + data.theme);   // e.g. "dust": red in place of yellow
     requestAnimationFrame(markSection);
 
     // ---------- Behaviour ----------
@@ -574,7 +576,7 @@
         let l;
         if ((l = item.match(/^Related:\s*\[(.+?)\]\((.+?)\)/i))) (sec.related = sec.related || []).push({ label: l[1], href: l[2] });
         else if ((l = item.match(/^\[(.+?)\]\((.+?)\)\s*(.*)$/))) {
-          if (/projects|research|teaching|themes|dust/i.test(sec.title)) (sec.menu = sec.menu || []).push({ label: l[1], href: l[2], meta: l[3].trim() });
+          if (/projects|research|teaching|themes|dust|pkwr/i.test(sec.title)) (sec.menu = sec.menu || []).push({ label: l[1], href: l[2], meta: l[3].trim() });
           else (sec.links = sec.links || []).push({ label: l[1], href: l[2] });
         }
         else (sec.list = sec.list || []).push(item);

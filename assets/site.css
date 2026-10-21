@@ -40,6 +40,8 @@
   --font: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
   --mono: var(--font);
 }
+/* dust pages: red in place of the PkWr yellow (set "theme": "dust" in a page's data block) */
+.theme-dust { --strip: #e63c18; --strip-hover: #cc3112; }   /* the dust red, from the dust logo */
 
 * { box-sizing: border-box; }
 /* no bold anywhere: one weight only, and no faux-bold */
