@@ -202,6 +202,9 @@ a { color: inherit; text-underline-offset: 3px; }
   visibility: hidden;
   transition: visibility 0s linear 720ms;
 }
+/* the panel's text: fades out first when the panel closes, and back in once it has opened */
+.panel > * { transition: opacity 400ms ease 250ms; }
+.project.panel-hidden .panel > * { opacity: 0; transition: opacity 180ms ease; }
 /* keep the controls clear of the open panel */
 .stage-bar { transition: padding-right 450ms var(--slide-ease), opacity 600ms ease; padding-right: calc(var(--panel-w) + var(--strip-w) + 22px); }
 .project.panel-hidden .stage-bar { padding-right: calc(var(--strip-w) + 22px); transition: padding-right 450ms var(--slide-ease) 260ms, opacity 600ms ease; }
@@ -471,6 +474,7 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
   .strip { display: none; }
   .zone.next { right: 0; }
   .drawer, .project.panel-hidden .drawer { background: transparent; box-shadow: none; }
+  .project.panel-hidden .panel > * { opacity: 1; }   /* phones: the panel is always there */
   .panel, .project.panel-hidden .panel, .project.panel-hidden .subnav { background: var(--panel-bg); }
   .panel, .project.panel-hidden .panel {
     width: auto; visibility: visible; overflow: visible;
@@ -499,6 +503,6 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
 }
 
 /* used when arriving with the panel already open */
-.no-anim .drawer, .no-anim .panel, .no-anim .strip, .no-anim .stage-bar { transition: none !important; }
+.no-anim .drawer, .no-anim .panel, .no-anim .panel > *, .no-anim .strip, .no-anim .stage-bar { transition: none !important; }
 .controls [hidden] { display: none !important; }
 .contact-line { white-space: pre-wrap; }
