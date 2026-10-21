@@ -1,6 +1,6 @@
 /*
 	Speed bar for the live pieces.
-	A small control, bottom left, shown when the pointer moves or the screen is tapped and hidden again when idle.
+	A small control, bottom centre, shown when the pointer moves or the screen is tapped and hidden again when idle.
 	Slide right for faster (shorter time between compositions), left for slower.
 
 	SpeedBar({ value, min, max, key }) returns { ms, shown(), due() }.
@@ -27,7 +27,7 @@ window.SpeedBar = function ({ value, min, max, key }) {
 	if (params.get("ui") !== "0") {
 		const css = document.createElement("style");
 		css.textContent = `
-			.speed-bar { position: fixed; bottom: 12px; left: 12px; z-index: 2147483647;
+			.speed-bar { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 2147483647;
 				display: flex; align-items: center; gap: 10px; padding: 8px 14px;
 				background: rgba(0,0,0,.72); color: #fff; border-radius: 999px;
 				font: italic 300 13px/1 'IBM Plex Mono', monospace; letter-spacing: 0;
@@ -35,7 +35,7 @@ window.SpeedBar = function ({ value, min, max, key }) {
 			.speed-bar.on { opacity: 1; pointer-events: auto; }
 			.speed-bar input { width: 140px; accent-color: #ffe100; margin: 0; }
 			.speed-bar output { min-width: 9.5em; text-align: right; font-style: normal; }
-			.speed-bar.framed { bottom: 64px; left: 16px; } /* inside a project page: sit above the page's caption */
+			.speed-bar.framed { bottom: 64px; } /* inside a project page: sit above the page's caption and credit */
 			@media (max-width: 480px) { .speed-bar input { width: 96px; } .speed-bar .end { display: none; } }`;
 		document.head.appendChild(css);
 
