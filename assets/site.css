@@ -198,8 +198,7 @@ a { color: inherit; text-underline-offset: 3px; }
 /* ---------- Panel (slides over the image) ---------- */
 .project.panel-hidden .panel {
   visibility: hidden;
-  background: var(--strip);   /* the whole side is yellow while closed, fading to white as it opens */
-  transition: visibility 0s linear 720ms, background-color 420ms ease;
+  transition: visibility 0s linear 720ms;
 }
 /* keep the controls clear of the open panel */
 .stage-bar { transition: padding-right 450ms var(--slide-ease), opacity 600ms ease; padding-right: calc(var(--panel-w) + var(--strip-w) + 22px); }
@@ -211,12 +210,17 @@ a { color: inherit; text-underline-offset: 3px; }
   z-index: 5;
   display: flex;
   transform: translateX(0);
-  transition: transform 450ms var(--slide-ease);
+  /* the side's colour is painted here, not on the scrolling panel: some browsers (seen in Dia,
+     which is built on Chrome) don't repaint a scrolling element's background during a fade,
+     which left the panel white while the section menu band turned yellow/red */
+  background: var(--panel-bg);
+  transition: transform 450ms var(--slide-ease), background-color 700ms ease 120ms;
 }
 .project.panel-hidden .drawer {
   transform: translateX(var(--panel-w));
   /* on close: fade back to yellow first, then slide away */
-  transition: transform 450ms var(--slide-ease) 260ms;
+  background: var(--strip);   /* the whole side is yellow while closed, fading to white as it opens */
+  transition: transform 450ms var(--slide-ease) 260ms, background-color 420ms ease;
 }
 .project.panel-hidden .strip { transition: background-color 420ms ease; }
 
@@ -275,8 +279,8 @@ a { color: inherit; text-underline-offset: 3px; }
 
 .panel {
   width: var(--panel-w);
-  background: var(--panel-bg);
-  transition: visibility 0s linear 0s, background-color 700ms ease 120ms;
+  background: transparent;    /* colour comes from the drawer behind it */
+  transition: visibility 0s linear 0s;
   overflow-y: auto;
   padding: var(--gutter);
   display: flex;
@@ -347,8 +351,8 @@ dl.meta dt { color: var(--muted); font-family: var(--mono); font-size: 11px; tex
   z-index: 2;
   margin: 0 calc(-1 * var(--gutter));
   padding: 14px var(--gutter) 12px;
-  /* same colour and fade as the panel, set directly: "inherit" jumps straight
-     to the end colour in some browsers (Safari), flashing a yellow band on close */
+  /* same colour and fade as the drawer behind the panel; it needs its own opaque
+     background because it stays stuck to the top while the panel scrolls */
   background: var(--panel-bg);
   transition: background-color 700ms ease 120ms;
   border-bottom: 1px solid var(--rule);
@@ -462,7 +466,8 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
   }
   .strip { display: none; }
   .zone.next { right: 0; }
-  .project.panel-hidden .panel, .project.panel-hidden .subnav { background: var(--panel-bg); }
+  .drawer, .project.panel-hidden .drawer { background: transparent; }
+  .panel, .project.panel-hidden .panel, .project.panel-hidden .subnav { background: var(--panel-bg); }
   .panel, .project.panel-hidden .panel {
     width: auto; visibility: visible; overflow: visible;
     min-height: calc(100svh - var(--peek));
