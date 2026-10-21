@@ -42,9 +42,10 @@ window.SpeedBar = function ({ value, min, max, key }) {
 		const bar = document.createElement("div");
 		bar.className = "speed-bar";
 		try { if (window.self !== window.top) bar.classList.add("framed"); } catch (e) { bar.classList.add("framed"); }
-		bar.innerHTML = `<span class="end">slower</span>
+		const end = v => label(v).replace("every ", "");
+		bar.innerHTML = `<span class="end">${end(max)}</span>
 			<input type="range" min="0" max="1000" step="1" aria-label="Speed: time between compositions">
-			<span class="end">faster</span><output aria-live="polite"></output>`;
+			<span class="end">${end(min)}</span><output aria-live="polite"></output>`;
 		const input = bar.querySelector("input"), out = bar.querySelector("output");
 		input.value = toPos(ms); out.textContent = label(ms);
 		input.addEventListener("input", () => {

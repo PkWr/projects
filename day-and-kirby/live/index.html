@@ -84,8 +84,8 @@
 		document.body.insertAdjacentHTML("beforeend", bendaydots());   // straight into <body>, as before
 		if (old) old.remove();
 	}
-	// Speed bar: 10 min as made; from 2 s to 20 min
-	const speed = SpeedBar({ value: REFRESH, min: 2000, max: 1200000, key: "dots-every" });
+	// Speed bar: from 1 s to 20 s, starting at 5 s (made at 10 min)
+	const speed = SpeedBar({ value: 5000, min: 1000, max: 20000, key: "dots-every" });
 	draw(); speed.shown();
 	setInterval(() => { if (speed.due()) { draw(); speed.shown(); } }, 100);
 })();

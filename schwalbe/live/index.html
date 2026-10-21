@@ -11,6 +11,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&family=Jost:ital,wght@0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="assets/style-flash.css" />
+	<style>html, body, #piece { height: 100%; } svg.ink { display: block; } /* the PHP page had no doctype, so browsers sized it this way anyway */</style>
 	<script src="assets/speed.js"></script>
 </head>
 <body>
@@ -121,8 +122,8 @@
 		const srcs = [...h.matchAll(/url\((images\/[^)]+)\)/g)].map(m => m[1]);
 		return Promise.all(srcs.map(load)).then(() => h);
 	}
-	// Speed bar: 5 s as made; from 0.5 s to 1 min
-	const speed = SpeedBar({ value: REFRESH, min: 500, max: 60000, key: "flash-every" });
+	// Speed bar: 5 s as made; from 1 s to 20 s
+	const speed = SpeedBar({ value: REFRESH, min: 1000, max: 20000, key: "flash-every" });
 	const due = () => new Promise(done => { const t = setInterval(() => { if (speed.due()) { clearInterval(t); done(); } }, 50); });
 	async function run() {
 		let ready = prepare();
