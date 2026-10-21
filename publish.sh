@@ -6,6 +6,8 @@
 # matching folder here as content.md, then commits and pushes to GitHub.
 #   Project Pages/Home - About.md      ->  content.md
 #   Project Pages/<project>/<any>.md   ->  <project>/content.md   (if that project folder exists here)
+#   Project Pages/dust/dust.md         ->  dust/content.md          (the dust home page)
+#   Project Pages/dust/<project>/*.md  ->  dust/<project>/content.md
 
 set -e
 VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/2026-PkWr/Projects/Project Pages"
@@ -35,6 +37,15 @@ for dir in "$VAULT"/themes/*/; do
   note="$(ls "$dir"*.md 2>/dev/null | head -n 1)"
   [ -n "$note" ] || continue
   cp "$note" "themes/$name/content.md" && echo "  themes/$name  <- $(basename "$note")" && copied=$((copied+1))
+done
+# dust: Project Pages/dust/<project>/<any>.md -> dust/<project>/content.md
+for dir in "$VAULT"/dust/*/; do
+  [ -d "$dir" ] || continue
+  name="$(basename "$dir")"
+  [ -d "dust/$name" ] || continue
+  note="$(ls "$dir"*.md 2>/dev/null | head -n 1)"
+  [ -n "$note" ] || continue
+  cp "$note" "dust/$name/content.md" && echo "  dust/$name  <- $(basename "$note")" && copied=$((copied+1))
 done
 echo "Copied $copied note(s)."
 

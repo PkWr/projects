@@ -27,13 +27,9 @@ Designer, educator and maker, Sheffield
 - [Working Backwards](themes/working-backwards/)
 - [Energy & Sustainability](themes/energy-and-sustainability/)
 
-## dust (2000–2020)
+## dust
 
-Patrick Walker, Founder & Creative Director
-
-Selected projects (in progress)
-
-- [Where Bombs Fell](where-bombs-fell/) 2016
+- [Selected projects, 2000–2020](dust/)
 
 ## About
 

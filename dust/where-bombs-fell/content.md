@@ -1,7 +1,7 @@
 ---
 title: Where Bombs Fell
 type: project-page
-page: https://pkwr.github.io/projects/where-bombs-fell/
+page: https://pkwr.github.io/projects/dust/where-bombs-fell/
 tags: [project-pages]
 ---
 
@@ -10,7 +10,7 @@ tags: [project-pages]
 
 # Where Bombs Fell
 
-*dust*
+*Public art*
 
 Geocached bronze roundels, audio and walking guide, 2016
 
@@ -55,7 +55,7 @@ The roundels have weathered into the streets since, gathering verdigris and wear
 ## Links
 
 - [dust archive: Where Bombs Fell](https://pkwr.craft.me/dust/b/5D30D822-C93D-4E46-8A7D-787D461DC70D/Where-Bombs-Fell)
-- Related: [Concrete, 2025](../concrete/)
+- Related: [Concrete, 2025](../../concrete/)
 
 ## Images
 
