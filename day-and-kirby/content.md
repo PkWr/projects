@@ -46,7 +46,7 @@ It was made as an accompanying invitation to Origin Stories, a Comics Up Close e
 
 ## Links
 
-- [Live piece: dots.pkwr.co](https://dots.pkwr.co)
+- [Live piece: pkwr.co/day-and-kirby/live](https://pkwr.co/day-and-kirby/live/)
 - Related: [Foxes, 2023](../foxes/)
 - Related: [From the Crypts of Fuchs to the Folds of Schwalbe, 2023](../schwalbe/)
 - Related: [Concrete, 2025](../concrete/)

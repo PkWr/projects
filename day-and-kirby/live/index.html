@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>*Ode to Day & Kirby*</title>
+	<meta name="author" content="Patrick Walker" />
+	<meta name="description" content="Ode to Day & Kirby" />
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&family=Jost:ital,wght@0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/style-dots.css" />
+	<style>html, body { height: 100%; } /* the PHP page had no doctype, so browsers sized it this way anyway */</style>
+</head>
+<body>
+<script>
+/*
+	Static version of index.php + bendaydots.php (2023), for hosting without PHP.
+	The PHP rolled random numbers and wrote the SVG on the server, refreshing every 10 minutes.
+	This does the same rolls in the browser and redraws every 10 minutes.
+	Ported as written: same ranges, same grid loops, same markup.
+	(The PHP drew the composition twice; the second copy sat below the screen, out of view, so it is drawn once here.)
+*/
+(function () {
+	const REFRESH = 600000;   // 10 minutes, as the original meta refresh
+	const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min; // PHP rand(): inclusive
+
+	const width = 3000, height = 3000;   // frame
+	const border = 0;
+
+	function bendaydots() {
+		const parts = [];
+		let dot_scale, dot_grid;
+
+		if (rand(1, 2) === 1) {
+			// Ben Day dot
+			dot_scale = rand(40, 80);
+			dot_grid = rand(1, 2);   // PHP's rand(1.8, 2) truncates to rand(1, 2)
+			const step = dot_scale * dot_grid;
+			const rows = (height - border * 2) / step;
+			const cols = (width - border * 2) / step;
+			parts.push("<svg class='ink'>");
+			let y_offset = -step;
+			for (let y = 0; y <= rows; y++) {
+				y_offset += step;
+				let x_offset = -step;
+				const bleed_col = `rgb(255, ${rand(0, 60)}, 0)`;
+				for (let x = 0; x <= cols; x++) {
+					const dot_radius = rand(1, dot_scale);
+					const dot_blur = dot_radius + rand(3, 16);
+					x_offset += step;
+					parts.push(`<circle class="dot-bleed" cx="${x_offset}" cy="${y_offset}" r="${dot_blur}" fill="${bleed_col}" />`);
+					parts.push(`<circle class="dot" cx="${x_offset}" cy="${y_offset}" r="${dot_radius}" fill="black" />`);
+				}
+			}
+		} else {
+			// Halftone dot
+			dot_scale = rand(5, 10);
+			dot_grid = rand(2, 6);
+			const step = dot_scale * dot_grid;
+			const rows = (height - border * 2) / step;
+			const cols = (width - border * 2) / step;
+			parts.push("<svg class='ink'>");
+			let y_offset = -step;
+			for (let y = 0; y <= rows; y++) {
+				y_offset += step;
+				let x_offset = -step;
+				for (let x = 0; x <= cols; x++) {
+					x_offset += step;
+					parts.push(`<circle class='dot' cx=${x_offset} cy=${y_offset} r=${dot_scale} fill='black' />`);
+				}
+			}
+		}
+		parts.push("</svg>");
+		return parts.join("");
+	}
+
+	function draw() {
+		const rgb = rand(200, 255);
+		document.body.style.backgroundColor = `rgb(${rgb}, ${rgb}, ${rgb})`;
+		const old = document.querySelector("svg.ink");
+		document.body.insertAdjacentHTML("beforeend", bendaydots());   // straight into <body>, as before
+		if (old) old.remove();
+	}
+	draw();
+	setInterval(draw, REFRESH);
+})();
+</script>
+</body>
+</html>
