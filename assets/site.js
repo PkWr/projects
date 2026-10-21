@@ -163,6 +163,13 @@
     const homeLabel = data.backLabel || "PkWr";
     const hasWayBack = !data.home || !!data.back;
     if (hasWayBack) stage.append(el("a", { class: "home-link", href: homeHref, title: homeLabel }, homeLabel));
+    // Optional mark over the image, centred on the visible part of the stage (e.g. the dust logo on the dust home).
+    // "logo": an SVG file next to the page; drawn in white through a mask, so any SVG works whatever its colour.
+    if (data.logo) {
+      const mark = el("span", { class: "stage-logo-mark" });
+      mark.style.setProperty("--logo", `url("${new URL(data.logo, location.href).href}")`);
+      stage.append(el("div", { class: "stage-logo", role: "img", "aria-label": data.logoLabel || data.title }, mark));
+    }
     if (data.slides.length < 2) prevNum.hidden = curNum.hidden = nextNum.hidden = playBtn.hidden = true;
 
     // ---------- Build panel ----------

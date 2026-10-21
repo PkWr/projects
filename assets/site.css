@@ -435,6 +435,21 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
 }
 .home-link:hover { opacity: 1; text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
 .home-link:focus-visible { outline: 1px solid #fff; outline-offset: 4px; }
+/* optional logo over the image (data "logo"): white, centred on the part of the image not covered by the panel */
+.stage-logo {
+  position: absolute; z-index: 3; top: 50%;
+  left: calc((100% - var(--panel-w) - var(--strip-w)) / 2);
+  width: clamp(110px, 20vmin, 220px); aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: drop-shadow(0 0 16px rgba(0,0,0,.35));   /* keeps it readable over pale images */
+  transition: left 450ms var(--slide-ease);
+}
+.project.panel-hidden .stage-logo { left: calc((100% - var(--strip-w)) / 2); transition: left 450ms var(--slide-ease) 260ms; }
+.stage-logo-mark {
+  display: block; width: 100%; height: 100%; background: #fff;
+  -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat;
+}
 .panel .eyebrow .crumb { text-transform: none; letter-spacing: 0; font-size: 12px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--strip); }
 .panel .eyebrow .crumb:hover { border-bottom-color: var(--ink); }
 
@@ -462,6 +477,7 @@ ul.plain li { padding: 9px 0; border-bottom: 1px solid var(--rule); line-height:
     border-radius: 2px; background: var(--rule);
   }
   .subnav { top: 0; margin: 0 -16px; padding: 12px 16px; }
+  .stage-logo, .project.panel-hidden .stage-logo { left: 50%; top: calc(50% - var(--peek) / 2); }
   /* controls sit just above where the panel starts */
   .stage-bar, .project.panel-hidden .stage-bar { padding-right: 22px; bottom: 18vh; bottom: var(--peek); }
   [data-action="panel"] { display: none; }
