@@ -164,11 +164,15 @@
     const hasWayBack = !data.home || !!data.back;
     if (hasWayBack) stage.append(el("a", { class: "home-link", href: homeHref, title: homeLabel }, homeLabel));
     // Optional mark over the image, centred on the visible part of the stage (e.g. the dust logo on the dust home).
-    // "logo": an SVG file next to the page; drawn in white through a mask, so any SVG works whatever its colour.
+    // "logo": an SVG file next to the page; drawn through a mask (white unless "logoColour" is set), so any SVG works whatever its colour.
     if (data.logo) {
       const mark = el("span", { class: "stage-logo-mark" });
       mark.style.setProperty("--logo", `url("${new URL(data.logo, location.href).href}")`);
-      stage.append(el("div", { class: "stage-logo", role: "img", "aria-label": data.logoLabel || data.title }, mark));
+      const logo = el("div", { class: "stage-logo", role: "img", "aria-label": data.logoLabel || data.title }, mark);
+      // optional colour and blend, e.g. "logoColour": "#e63c18", "logoBlend": "multiply" (default: plain white)
+      if (data.logoColour) logo.style.setProperty("--logo-colour", data.logoColour);
+      if (data.logoBlend) logo.style.setProperty("--logo-blend", data.logoBlend);
+      stage.append(logo);
     }
     if (data.slides.length < 2) prevNum.hidden = curNum.hidden = nextNum.hidden = playBtn.hidden = true;
 
