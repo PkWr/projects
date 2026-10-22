@@ -363,7 +363,8 @@
       void img.offsetWidth;                                     // start from "from", then glide
       // hold still while it fades in, then ease in slowly and ease out the same way
       const hold = 1500;
-      img.style.transition = `transform ${ms}ms cubic-bezier(.65,0,.35,1) ${hold}ms`;
+      // a gentle sine ease: its top speed is about half that of a steeper curve over the same time
+      img.style.transition = `transform ${ms}ms cubic-bezier(.37,0,.63,1) ${hold}ms`;
       img.style.transform = t(to);
       s._panMs = ms + hold;
     }
