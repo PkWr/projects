@@ -154,6 +154,8 @@
     const playBtn = btn("", "play", "Pause slideshow", "icon");
     const fullBtn = btn("", "full", "Full screen", "icon");
     fullBtn.innerHTML = ICON.full;
+    // iPhone Safari only allows full screen for video, so the button would do nothing there: hide it where the browser can't
+    if (!(document.fullscreenEnabled || document.webkitFullscreenEnabled)) fullBtn.hidden = true;
     const controls = el("div", { class: "controls" }, prevNum, curNum, nextNum, playBtn, fullBtn);
     const stageBar = el("div", { class: "stage-bar" }, caption, controls);
     stage.append(stageBar);
@@ -443,7 +445,7 @@
       if (a === "next") go(current + 1);
       if (a === "play") setPlaying(!playing);
       if (a === "full") {
-        if (document.fullscreenElement) document.exitFullscreen();
+        if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
         else (stage.requestFullscreen || stage.webkitRequestFullscreen)?.call(stage);
       }
     });
