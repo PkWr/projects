@@ -317,7 +317,7 @@ a { color: inherit; text-underline-offset: 3px; }
 dl.meta {
   margin: 0;
   display: grid;
-  grid-template-columns: 8.5em 1fr;
+  grid-template-columns: 11em 1fr;
   border-top: 1px solid var(--ink);
   font-size: 13px;
 }
@@ -327,7 +327,7 @@ dl.meta dt, dl.meta dd {
   border-bottom: 1px solid var(--rule);
   line-height: 1.4;
 }
-dl.meta dt { color: var(--muted); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding-top: 11px; }
+dl.meta dt { color: var(--muted); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding-top: 11px; padding-right: 16px; } /* room between long labels (Commissioned by) and the value */
 
 .panel h2 {
   font-family: var(--mono);
