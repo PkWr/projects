@@ -23,11 +23,13 @@ Patrick Walker, Founder & Creative Director
 - [Autopsy — The Head Post Office](autopsy-the-head-post-office/) 2016
 - [Going Public](going-public/) 2015
 - [Feast](feast/) 2015
+- [Revealing Craft](revealing-craft/) 2013
 - [Corridor 8 — 3rd Series](corridor-8/) 2012
 - [Ernest Edmonds Light Logic](ernest-edmonds-light-logic/) 2012
 - [Flapping Track / Strike Down / Foundry](flapping-track-strike-down-foundry/) 2010
 - [Unloud](unloud/) 2009
 - [Varoom](varoom/) 2008
+- [Water Garden City](water-garden-city/) 2008
 - [Broken & Breaking Ground](broken-and-breaking-ground/) 2008
 - [Fear of a Black Planet](fear-of-a-black-planet/) 2006
 - [Bitter Sweet](bitter-sweet/) 2006
