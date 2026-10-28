@@ -18,7 +18,7 @@ A book introducing Water Garden City, Albilad Real Estate's waterfront developme
 
 ## Description
 
-The book is bound in white cloth with a blind-embossed cover and a ribbon marker. Inside, quotations on water and the desert sit with illustration by Sandrine Pelletier, photograms by Clive Egginton and the plans for the city.
+The book is bound in white cloth with a blind-embossed cover and a ribbon marker, and includes letterpress-printed pages. Inside, quotations on water and the desert sit with illustration by Sandrine Pelletier, photograms by Clive Egginton and the plans for the city.
 
 ## Details
 
@@ -30,6 +30,7 @@ The book is bound in white cloth with a blind-embossed cover and a ribbon marker
 | Masterplan | HOK |
 | Illustration | Sandrine Pelletier |
 | Photograms | Clive Egginton |
+| Print | Includes letterpress |
 | Design & Art Direction | dust |
 
 ## Images
