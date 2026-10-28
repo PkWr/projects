@@ -24,9 +24,14 @@ Patrick Walker, Founder & Creative Director
 - [Going Public](going-public/) 2015
 - [Feast](feast/) 2015
 - [Corridor 8 — 3rd Series](corridor-8/) 2012
+- [Ernest Edmonds Light Logic](ernest-edmonds-light-logic/) 2012
+- [Flapping Track / Strike Down / Foundry](flapping-track-strike-down-foundry/) 2010
+- [Unloud](unloud/) 2009
 - [Varoom](varoom/) 2008
+- [Broken & Breaking Ground](broken-and-breaking-ground/) 2008
 - [Fear of a Black Planet](fear-of-a-black-planet/) 2006
 - [Bitter Sweet](bitter-sweet/) 2006
+- [Deichniúr Fear](deichniur-fear/) 2006
 - [C90](c90/) 2005
 - [The Treble](the-treble/) 2003
 
