@@ -19,7 +19,7 @@ AI enters the same question. In Concrete it was used to build the tooling, not t
 
 GD v/x AI carries this into teaching: Spot, motion tooling that runs in a web browser, from a phone to the Igloo's six-wall Immersive Suite, in real time with no render pass. It is designed to use far less energy than a render-based workflow, and measuring that is part of the project.
 
-Form (2026) makes the same choices. It is a generative tool and publication that runs entirely in the browser, with no server, and its books are printed on demand, so nothing is made in advance. The AI that helped build it is not used when it runs.
+Form (2026) makes the same choices. It is a generative tool and publication that runs entirely in the browser, with no server, and its books are printed on demand, so nothing is made in advance. It explores material use as on demand too: paper and ink are spent only when a reader wants a book. The AI that helped build it is not used when it runs.
 
 ## Projects
 

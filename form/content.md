@@ -46,7 +46,7 @@ It shares its look and approach with Spot, the motion tooling made for GD v/x AI
 
 ## Energy & sustainability
 
-Form runs on the device already in the room, in a web browser, with no server. The drawings, the GIF and video, and the PDF book are all made on the device, and nothing is uploaded. Books are printed on demand, so none is made in advance.
+Form runs on the device already in the room, in a web browser, with no server. The drawings, the GIF and video, and the PDF book are all made on the device, and nothing is uploaded. Books are printed on demand, so none is made in advance. Form uses this to explore material use as on demand: paper and ink are spent only when a reader wants a book, and only for the pattern they have drawn. What that saves, against a printed edition, has not been measured.
 
 AI enters the same question as in Concrete and Spot. The assistant was used to build Form, not to run it, so its energy was spent once, in development. The energy used to build Form has not been measured separately.
 
