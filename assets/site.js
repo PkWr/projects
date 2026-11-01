@@ -188,7 +188,7 @@
       !hasWayBack ? (data.eyebrow ? el("p", { class: "eyebrow" }, data.eyebrow) : "")
         : el("p", { class: "eyebrow" }, el("a", { class: "crumb", href: homeHref }, homeLabel), data.eyebrow ? "  /  " + data.eyebrow : ""),
       el("h1", {}, data.title),
-      data.subtitle ? el("p", { class: "subtitle" }, data.subtitle) : ""));
+      data.subtitle ? el("p", { class: "subtitle" }, ...lines(data.subtitle)) : ""));
 
     // ---------- Sections ----------
     // Pages can list "sections" explicitly; otherwise they're built from the older keys.

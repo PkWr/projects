@@ -12,7 +12,7 @@ tags: [project-pages]
 
 *Research & teaching*
 
-A web tool for 11 ways I can make you up, 2026
+This hole is a line some time next week.<br>A generative tool based on a publication by Patrick Walker.
 
 ## Summary
 
