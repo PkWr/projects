@@ -44,6 +44,12 @@ It is plain HTML, CSS and JavaScript, with no server, no accounts and no build s
 
 It shares its look and approach with Spot, the motion tooling made for GD v/x AI.
 
+## Energy & sustainability
+
+Form runs on the device already in the room, in a web browser, with no server. The drawings, the GIF and video, and the PDF book are all made on the device, and nothing is uploaded. Books are printed on demand, so none is made in advance.
+
+AI enters the same question as in Concrete and Spot. The assistant was used to build Form, not to run it, so its energy was spent once, in development. The energy used to build Form has not been measured separately.
+
 ## Details
 
 | | |
@@ -55,6 +61,10 @@ It shares its look and approach with Spot, the motion tooling made for GD v/x AI
 | Made with | HTML, CSS and JavaScript; SVG output; no server |
 | Outputs | Animated SVG, contact sheet, print A3 to A0, GIF and video, A5 book (PDF) |
 | Model | Print on demand: each book is generated from the reader's pattern, identified by a pattern code |
+
+## Themes
+
+- [Energy & Sustainability](../themes/energy-and-sustainability/)
 
 ## Links
 
