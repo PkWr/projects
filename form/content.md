@@ -30,7 +30,7 @@ The step-by-step order is deliberate: draw, see the results, and only then the o
 
 ## Publication model
 
-Form treats the publication as an on-demand object. No edition is printed in advance. Each book is generated in the browser from the pattern the reader has drawn, then exported as A5 pages imposed two to a sheet of A4 landscape in booklet order. The reader prints it double-sided, folds it and staples it. Production therefore moves to the reader, so there is no stock, no fulfilment and no server. The plain A5 export serves the same book on screen.
+Form treats the publication as an on-demand object. No edition is printed in advance. Each book is generated in the browser from the pattern the reader has drawn, then exported as A5 pages imposed two to a sheet of A4 landscape in booklet order. The reader prints it double-sided, folds it and binds it. Production therefore moves to the reader, so there is no stock, no fulfilment and no server. The plain A5 export serves the same book on screen.
 
 Because the book follows from the pattern, the pattern can identify it. The colophon prints a pattern code. The code records the shape, cropped to its bounding box, and the grid size. The same shape drawn in a different place on the same grid gives the same code, and a T of six squares on a 9×9 grid is 32753-KSWXQ-J9. The order of the unmake sequence is seeded from the code and no date is printed, so entering a code regenerates the identical book.
 
