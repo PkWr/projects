@@ -65,6 +65,7 @@ AI enters the same question as in [Concrete](../concrete/) and [Spot](../spot/).
 ## Themes
 
 - [Energy & Sustainability](../themes/energy-and-sustainability/)
+- [Working Backwards](../themes/working-backwards/)
 
 ## Links
 
