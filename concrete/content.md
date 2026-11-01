@@ -23,7 +23,7 @@ An industrial concrete mixer runs in the basement of Castle House. A camera moun
 
 The piece holds two opposite pressures. The mixer homogenises, turning everything over until it is one uniform mass. The kaleidoscope separates, cutting the same material into mirrored segments that are divided, repeated and held apart. Between them sit separation, segregation and the pull towards homogenisation, and what is at stake in each: culture, power, identity, kindness and empathy.
 
-Concrete moves on from Working Backwards (2023). Where those pieces used generative systems hand-coded by the artist, Concrete was built with AI-assisted tooling, giving the live mix a mixing-desk range of parameters.
+Concrete moves on from [Working Backwards](../themes/working-backwards/) (2023). Where those pieces used generative systems hand-coded by the artist, Concrete was built with AI-assisted tooling, giving the live mix a mixing-desk range of parameters.
 
 The set-up is a comment in itself. The whole visual mix runs on a Raspberry Pi, a credit-card-sized computer drawing roughly 3 to 9 watts, where the usual tools for live visuals, such as TouchDesigner or Resolume, need a machine with a dedicated graphics card drawing tens to hundreds of watts. There is no rendering pass either: rather than sequences rendered out in advance over hours and stored as large video files, each frame is generated only as it is projected, and nothing is kept.
 
@@ -45,7 +45,7 @@ Against that, the machinery dominates the room. The mixer's motor draws around 5
 |---|---|
 | Dates | 10 to 12 October 2025 |
 | Venue | Basement, Castle House, Angel Street, Sheffield |
-| Event | No Bounds Festival 2025 |
+| Event |No Bounds Festival 2025 |
 | Talk | Artist talk, Saturday 11 October, 12pm |
 
 ## Themes

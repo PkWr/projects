@@ -25,7 +25,7 @@ Foxes is a generative data narrative application designed to bridge the gap betw
 
 The generation itself is uncurated. Three outputs were chosen to represent the range of the system rather than a best-of, then worked backwards into physical prints. The prints were produced as part of an induction into the Photo Intaglio process, using solar plates with the support of Specialist Technician, Mike MacGabhann in the Printmaking workshop (TORS).
 
-Foxes was the first of three pieces in Working Backwards (2023), each made as an accompanying invitation to a specific event. It set the pattern the others follow: digital generative process first, traditional or embodied rendering last.
+Foxes was the first of three pieces in [Working Backwards](../themes/working-backwards/) (2023), each made as an accompanying invitation to a specific event. It set the pattern the others follow: digital generative process first, traditional or embodied rendering last.
 
 ## Materials
 

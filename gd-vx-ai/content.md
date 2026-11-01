@@ -21,7 +21,7 @@ A Scholarship of Teaching and Learning project at Sheffield Hallam University, a
 
 Most classroom use of AI in graphic design means prompting for images, text or layouts. GD v/x AI tests an alternative: students and staff co-developing new AI tooling and processes together, moving AI from tool-use into shared creative practice.
 
-Concrete (2025) was its proof of concept. Spot (2026), image-processing and motion tooling that runs in a web browser, is its first tooling output, and Form (2026), a generative tool and publication, follows.
+[Concrete](../concrete/) (2025) was its proof of concept. [Spot](../spot/) (2026), image-processing and motion tooling that runs in a web browser, is its first tooling output, and [Form](../form/) (2026), a generative tool and publication, follows.
 
 In each, the AI is in the making, not the running: every effect is a drawing technique, not a generative model. How each was made, and what it costs in energy, is on its own page.
 

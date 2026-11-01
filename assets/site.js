@@ -212,7 +212,7 @@
       const id = "sec-" + (s.id || slug(s.title) || i);
       const sec = el("section", { class: "sec", id });
       if (s.title) sec.append(el("h2", {}, s.title));
-      if (s.text) [].concat(s.text).forEach(t => sec.append(el("p", {}, t)));
+      if (s.text) [].concat(s.text).forEach(t => sec.append(el("p", {}, ...linkify(t))));
       if (s.list) {
         const ul = el("ul", { class: "plain" });
         s.list.forEach(t => ul.append(el("li", {}, t)));
@@ -533,6 +533,20 @@
   }
 
   // ---------- helpers ----------
+  // [label](url) inside a paragraph becomes a link. Other sites open in a new tab; bold and italics stay unsupported.
+  function linkify(text) {
+    const out = [], re = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+    let last = 0, m;
+    text = String(text);
+    while ((m = re.exec(text))) {
+      if (m.index > last) out.push(text.slice(last, m.index));
+      const external = isExternal(m[2]);
+      out.push(el("a", external ? { href: m[2], target: "_blank", rel: "noopener" } : { href: m[2] }, m[1]));
+      last = re.lastIndex;
+    }
+    if (last < text.length) out.push(text.slice(last));
+    return out.length ? out : [text];
+  }
   // A label can break onto a new line with <br>, e.g. "Selected projects<br>2000–2020"
   function lines(text) {
     return String(text).split(/<br\s*\/?>/i).flatMap((t, i) => i ? [document.createElement("br"), t] : [t]);

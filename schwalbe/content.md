@@ -23,7 +23,7 @@ A generative visual work depicting the eye itself at the instant of flash blindn
 
 The title maps a journey across the eye. Fuchs' crypts are openings in the iris; Schwalbe's line marks the edge of the cornea. From one to the other is a literal path from iris to cornea, matching the subject of the piece.
 
-Here the traditional rendering in Working Backwards is the live gig visual. The piece was performed as a projection onto and behind the band Pohl, as Atomic Test 1 / Pohl edition, at Strident Nights.
+Here the traditional rendering in [Working Backwards](../themes/working-backwards/) is the live gig visual. The piece was performed as a projection onto and behind the band Pohl, as Atomic Test 1 / Pohl edition, at Strident Nights.
 
 ## Materials
 

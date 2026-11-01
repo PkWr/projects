@@ -23,7 +23,7 @@ Ode to Day & Kirby is a parametric grid composition: a generative system of dots
 
 The title is an ode to the designer Robin Day and the comics artist Jack Kirby.
 
-As with the other pieces in Working Backwards, the digital system came first and the traditional rendering last. The final piece is paint on a physical surface.
+As with the other pieces in [Working Backwards](../themes/working-backwards/), the digital system came first and the traditional rendering last. The final piece is paint on a physical surface.
 
 It was made as an accompanying invitation to Origin Stories, a Comics Up Close event at Sheffield Hallam University.
 

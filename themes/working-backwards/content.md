@@ -17,7 +17,7 @@ Generative craft to physical craft
 
 Working Backwards is a method that runs through the practice. Each piece starts from apparent randomness, governed by narrative or thematic parameters set by the artist. It is worked out digitally, in self-authored code, then worked backwards into a traditional or embodied form.
 
-In 2023 that meant three pieces, each made as an invitation to a specific event: Foxes, rendered as photo intaglio prints; Ode to Day & Kirby, rendered in paint; and From the Crypts of Fuchs to the Folds of Schwalbe, performed as a live projection. Concrete (2025) carries the method into live installation, where the physical rendering is real machinery.
+In 2023 that meant three pieces, each made as an invitation to a specific event: [Foxes](../../foxes/), rendered as photo intaglio prints; [Ode to Day & Kirby](../../day-and-kirby/), rendered in paint; and [From the Crypts of Fuchs to the Folds of Schwalbe](../../schwalbe/), performed as a live projection. [Concrete](../../concrete/) (2025) carries the method into live installation, where the physical rendering is real machinery.
 
 ## Projects
 

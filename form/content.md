@@ -42,13 +42,13 @@ Form has been built since 31 October 2026 by Patrick Walker, working with an AI 
 
 It is plain HTML, CSS and JavaScript, with no server, no accounts and no build step. Everything is made in the browser: the drawings are SVG, and the GIF encoder and the PDF writer for the book are written by hand, so nothing is uploaded. The book is imposed for printing, with two A5 pages on each A4 landscape sheet in booklet order, or as plain pages.
 
-It shares its look and approach with Spot, the motion tooling made for GD v/x AI.
+It shares its look and approach with [Spot](../spot/), the motion tooling made for [GD v/x AI](../gd-vx-ai/).
 
 ## Energy & sustainability
 
 Form runs on the device already in the room, in a web browser, with no server. The drawings, the GIF and video, and the PDF book are all made on the device, and nothing is uploaded. Books are printed on demand, so none is made in advance. Form uses this to explore material use as on demand: paper and ink are spent only when a reader wants a book, and only for the pattern they have drawn.
 
-AI enters the same question as in Concrete and Spot. The assistant was used to build Form, not to run it, so its energy was spent once, in development. The energy used to build Form has not been measured separately.
+AI enters the same question as in [Concrete](../concrete/) and [Spot](../spot/). The assistant was used to build Form, not to run it, so its energy was spent once, in development. The energy used to build Form has not been measured separately.
 
 ## Details
 

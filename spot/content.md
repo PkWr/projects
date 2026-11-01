@@ -16,7 +16,7 @@ Image-processing and motion tooling, 2026
 
 ## Summary
 
-Spot is image-processing and motion tooling that runs in a web browser, made for GD v/x AI. It cycles through photographs and processes them live, from a phone to the six walls of the Igloo Immersive Suite.
+Spot is image-processing and motion tooling that runs in a web browser, made for [GD v/x AI](../gd-vx-ai/). It cycles through photographs and processes them live, from a phone to the six walls of the Igloo Immersive Suite.
 
 ## Description
 
@@ -24,7 +24,7 @@ Spot processes photographs as they play: duotone, pixelate, halftone and ASCII e
 
 It needs no specialist hardware, account, subscription or upload. The same tooling scales from a phone to a desktop to the six walls of the Igloo, where it first ran as Spot Room on 15 October 2026, and it works in real time, with no render pass. Spot Reel is the showreel.
 
-Spot is the first tooling output of GD v/x AI, after its proof of concept, Concrete (2025).
+Spot is the first tooling output of [GD v/x AI](../gd-vx-ai/), after its proof of concept, [Concrete](../concrete/) (2025).
 
 ## How it's made
 
@@ -44,7 +44,7 @@ Spot asks for none of this: a web browser on the device already in the room, a p
 
 It does as little as the look needs. Most effects are simple 2D drawing techniques applied to one image at a time. The 3D library only loads when 3D forms are switched on, and the images ship with the page rather than coming from a cloud service.
 
-AI enters the same question, as it did in Concrete. Here it was used to build the tooling, not to run it. Its energy was spent once, in development, and not again each time Spot plays. That matters in a current discourse focused on the growing electricity and water demands of data centres.
+AI enters the same question, as it did in [Concrete](../concrete/). Here it was used to build the tooling, not to run it. Its energy was spent once, in development, and not again each time Spot plays. That matters in a current discourse focused on the growing electricity and water demands of data centres.
 
 Spot is designed to use far less energy than a render-based workflow; measuring that, in the studio and in the Igloo, is part of the project.
 
