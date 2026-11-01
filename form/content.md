@@ -12,7 +12,7 @@ tags: [project-pages]
 
 *Research & teaching*
 
-A web tool for *11 ways I can make you up*, 2026
+A web tool for 11 ways I can make you up, 2026
 
 ## Summary
 
@@ -20,7 +20,7 @@ Draw a shape on a grid, choose a rule, and Form works out every way of changing 
 
 ## Description
 
-The book *11 ways I can make you up* takes a T built from blocks and moves one block at a time. Each move leaves the old place marked. Each version is shown alongside the others, as form, direction, cumulative solid, cumulative transparency and cumulative density. The book draws on the Stations of the Cross, a sequence told in fixed steps; on Paul Klee's idea of taking a line for a walk; and on Rudolf Koch's *The Book of Signs*, a catalogue of simple symbols drawn from a small set of marks. It also follows Karl Gerstner's *Designing Programmes*, in which a design is set out as a rule that generates a field of related outcomes instead of a single fixed result.
+The book 11 ways I can make you up takes a T built from blocks and moves one block at a time. Each move leaves the old place marked. Each version is shown alongside the others, as form, direction, cumulative solid, cumulative transparency and cumulative density. The book draws on the Stations of the Cross, a sequence told in fixed steps; on Paul Klee's idea of taking a line for a walk; and on Rudolf Koch's The Book of Signs, a catalogue of simple symbols drawn from a small set of marks. It also follows Karl Gerstner's Designing Programmes, in which a design is set out as a rule that generates a field of related outcomes instead of a single fixed result.
 
 Form turns that rule into a tool. Each cell of the grid is empty or holds a square, a circle, an arch or a half-square triangle. The arch and the triangle turn four ways, which gives eleven states per cell. Form then makes it up every way the rule allows: one block moves and stays joined to the rest, and its old place stays marked. It also runs the rule the other way and unmakes the shape, taking one block away at a time and adding nothing back. The two come as one sequence, titled with both counts, for example "36 ways I can make you up and 9 ways to unmake you".
 
@@ -51,7 +51,7 @@ It shares its look and approach with Spot, the motion tooling made for GD v/x AI
 | Type | Generative tool and publication |
 | Year | 2026 |
 | Author | Patrick Walker |
-| Based on | *11 ways I can make you up* (printed publication) |
+| Based on | 11 ways I can make you up (printed publication) |
 | Made with | HTML, CSS and JavaScript; SVG output; no server |
 | Outputs | Animated SVG, contact sheet, print A3 to A0, GIF and video, A5 book (PDF) |
 | Model | Print on demand: each book is generated from the reader's pattern, identified by a pattern code |
