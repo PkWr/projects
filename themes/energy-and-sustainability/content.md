@@ -23,3 +23,4 @@ GD v/x AI carries this into teaching: Spot, motion tooling that runs in a web br
 
 - [Concrete](../../concrete/) 2025
 - [GD v/x AI](../../gd-vx-ai/) 2025–27
+- [Spot](../../spot/) 2026
