@@ -21,6 +21,7 @@ Designer, educator and maker, Sheffield
 ## Research & teaching
 
 - [GD v/x AI](gd-vx-ai/) 2025–27
+- [Form](form/) 2026
 
 ## Themes
 
