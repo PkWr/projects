@@ -16,23 +16,23 @@ This hole is a line some time next week.<br>A generative tool based on a publica
 
 ## Summary
 
-Draw a shape on a grid, choose a rule, and Form works out every way of changing it, one block at a time. It began as a small printed book, in which a T is made up eleven ways, and now runs in a web browser. What it makes can be played as an animation, laid out as a contact sheet and printed, saved as a GIF or video, or bound as an A5 book.
+Draw a shape on a grid, or take a symbol or a letter at random, choose a rule, and Form works out every way the rule can make it up, one step at a time. It began as a small printed book, in which a T is made up eleven ways, and now runs in a web browser. What it makes can be played as an animation, laid out as a contact sheet and printed, saved as a GIF or video, or bound as an A5 book.
 
 ## Description
 
 The book 11 ways I can make you up takes a T built from blocks and moves one block at a time. Each move leaves the old place marked. Each version is shown alongside the others, as form, direction, cumulative solid, cumulative transparency and cumulative density. The book draws on the Stations of the Cross, a sequence told in fixed steps; on Paul Klee's idea of taking a line for a walk; and on Rudolf Koch's The Book of Signs, a catalogue of simple symbols drawn from a small set of marks. It also follows Karl Gerstner's Designing Programmes, in which a design is set out as a rule that generates a field of related outcomes instead of a single fixed result.
 
-Form turns that rule into a tool. Each cell of the grid is empty or holds a square, a circle, an arch or a half-square triangle. The arch and the triangle turn four ways, which gives eleven states per cell. Form then makes it up every way the rule allows: one block moves and stays joined to the rest, and its old place stays marked. It also runs the rule the other way and unmakes the shape, taking one block away at a time and adding nothing back. The two come as one sequence, titled with both counts, for example "36 ways I can make you up and 9 ways to unmake you".
+Form turns that rule into a tool. Each cell of the grid is empty or holds a square, a circle, an arch or a half-square triangle. The arch and the triangle turn four ways, which gives eleven states per cell. The book's rule is Move: one block moves and stays joined to the rest, and its old place stays marked. Form adds two more rules, Change, where a block becomes another shape in the same place, and Grow, where the shape is built up from nothing. Each can act on one, two, three or all of the blocks in a step. Unmake is the rule run the other way: it takes blocks away one at a time and adds nothing back, and it follows by default. The rule is a sentence in the control panel, and tapping its words changes it. The results come as one sequence, titled by the rules chosen, for example "36 ways I can make you up, two blocks at a time and unmake you".
 
 Five treatments show the same set differently: plain form, direction (stripes along each move), cumulative solid, transparency (ghosting) that fades with each step, and cumulative density, fine lines at different angles that build into a mesh.
 
-The step-by-step order is deliberate: draw, see the results, and only then the outputs, with the book last. Going back to edit the shape is always possible.
+The step-by-step order is deliberate: draw, see the results, and only then the outputs, with the book last. Going back to edit the shape is always possible. Starters come from two sets: signs and shapes, some in the manner of Koch, and a small 5×5 pixel typeface of capitals and numbers drawn for Form. The grid is 5, 7 or 9 across, and a separate demo page runs the sentence and the loop on its own.
 
 ## Publication model
 
 Form treats the publication as an on-demand object. No edition is printed in advance. Each book is generated in the browser from the pattern the reader has drawn, then exported as A5 pages imposed two to a sheet of A4 landscape in booklet order. The reader prints it double-sided, folds it and binds it. Production therefore moves to the reader, so there is no stock, no fulfilment and no server. The plain A5 export serves the same book on screen.
 
-Because the book follows from the pattern, the pattern can identify it. The colophon prints a pattern code. The code records the shape, cropped to its bounding box, and the grid size. The same shape drawn in a different place on the same grid gives the same code, and a T of six squares on a 9×9 grid is 32753-KSWXQ-J9. The order of the unmake sequence is seeded from the code and no date is printed, so entering a code regenerates the identical book.
+Because the book follows from the pattern, the pattern can identify it. The colophon prints a pattern code. The code records the shape, cropped to its bounding box, the grid size, the rules and how many blocks act at a time. The same shape drawn in a different place on the same grid gives the same code, and a T of six squares on a 9×9 grid is 32753-KSWXQ-J9. The order in which blocks are taken away or added is seeded from the code and no date is printed, so entering a code regenerates the identical book.
 
 The space of possible patterns is vast. With eleven states per cell, a 7×7 grid allows more than 10⁵¹ patterns and a 15×15 grid more than 10²³⁴, before shifted copies are counted as one. A hand-drawn pattern is, in practice, one of a kind. Identical copies remain possible, though. The starter symbols and very simple shapes coincide, and the random starter only fills the grid, so it never changes the code. The code makes that visible, so uniqueness becomes a property a reader can test, not a claim the publication makes for itself. Two readers can compare codes to learn whether they hold the same book.
 
@@ -59,7 +59,7 @@ AI enters the same question as in [Concrete](../concrete/) and [Spot](../spot/).
 | Author | Patrick Walker |
 | Based on | 11 ways I can make you up (printed publication) |
 | Made with | HTML, CSS and JavaScript; SVG output; no server |
-| Outputs | Animated SVG, contact sheet, print A3 to A0, GIF and video, A5 book (PDF) |
+| Outputs | Animated SVG, contact sheet, print A3 to A0, GIF and video, A5 book (PDF), demo page |
 | Model | Print on demand: each book is generated from the reader's pattern, identified by a pattern code |
 
 ## Themes
