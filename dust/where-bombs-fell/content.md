@@ -1,7 +1,7 @@
 ---
 title: Where Bombs Fell
 type: project-page
-page: https://pkwr.github.io/projects/dust/where-bombs-fell/
+page: https://pkwr.co/dust/where-bombs-fell/
 tags: [project-pages]
 ---
 

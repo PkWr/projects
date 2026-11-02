@@ -1,7 +1,7 @@
 ---
 title: dust
 type: project-page
-page: https://pkwr.github.io/projects/dust/
+page: https://pkwr.co/dust/
 tags: [project-pages]
 ---
 

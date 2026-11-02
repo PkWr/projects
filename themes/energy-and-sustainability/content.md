@@ -1,7 +1,7 @@
 ---
 title: Energy & Sustainability
 type: project-page
-page: https://pkwr.github.io/projects/themes/energy-and-sustainability/
+page: https://pkwr.co/themes/energy-and-sustainability/
 tags: [project-pages]
 ---
 

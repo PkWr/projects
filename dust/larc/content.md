@@ -1,7 +1,7 @@
 ---
 title: LARC (Leeds Arts Research Centre)
 type: project-page
-page: https://pkwr.github.io/projects/dust/larc/
+page: https://pkwr.co/dust/larc/
 tags: [project-pages, dust]
 ---
 

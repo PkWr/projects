@@ -1,7 +1,7 @@
 ---
 title: Bitter Sweet
 type: project-page
-page: https://pkwr.github.io/projects/dust/bitter-sweet/
+page: https://pkwr.co/dust/bitter-sweet/
 tags: [project-pages, dust]
 ---
 

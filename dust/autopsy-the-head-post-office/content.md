@@ -1,7 +1,7 @@
 ---
 title: Autopsy — The Head Post Office
 type: project-page
-page: https://pkwr.github.io/projects/dust/autopsy-the-head-post-office/
+page: https://pkwr.co/dust/autopsy-the-head-post-office/
 tags: [project-pages, dust]
 ---
 

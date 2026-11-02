@@ -1,7 +1,7 @@
 ---
 title: Corridor 8 — 3rd Series
 type: project-page
-page: https://pkwr.github.io/projects/dust/corridor-8/
+page: https://pkwr.co/dust/corridor-8/
 tags: [project-pages, dust]
 ---
 

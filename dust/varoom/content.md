@@ -1,7 +1,7 @@
 ---
 title: Varoom
 type: project-page
-page: https://pkwr.github.io/projects/dust/varoom/
+page: https://pkwr.co/dust/varoom/
 tags: [project-pages, dust]
 ---
 

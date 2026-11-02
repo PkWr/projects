@@ -1,7 +1,7 @@
 ---
 title: Fear of a Black Planet
 type: project-page
-page: https://pkwr.github.io/projects/dust/fear-of-a-black-planet/
+page: https://pkwr.co/dust/fear-of-a-black-planet/
 tags: [project-pages, dust]
 ---
 

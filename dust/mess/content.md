@@ -1,7 +1,7 @@
 ---
 title: Mess
 type: project-page
-page: https://pkwr.github.io/projects/dust/mess/
+page: https://pkwr.co/dust/mess/
 tags: [project-pages, dust]
 ---
 

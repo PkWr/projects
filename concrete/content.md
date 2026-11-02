@@ -1,7 +1,7 @@
 ---
 title: Concrete
 type: project-page
-page: https://pkwr.github.io/projects/concrete/
+page: https://pkwr.co/concrete/
 tags: [project-pages]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Spot
 type: project-page
-page: https://pkwr.github.io/projects/spot/
+page: https://pkwr.co/spot/
 tags: [project-pages]
 ---
 

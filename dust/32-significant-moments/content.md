@@ -1,7 +1,7 @@
 ---
 title: 32 Significant Moments
 type: project-page
-page: https://pkwr.github.io/projects/dust/32-significant-moments/
+page: https://pkwr.co/dust/32-significant-moments/
 tags: [project-pages, dust]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Working Backwards
 type: project-page
-page: https://pkwr.github.io/projects/themes/working-backwards/
+page: https://pkwr.co/themes/working-backwards/
 tags: [project-pages]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Ode to Day & Kirby
 type: project-page
-page: https://pkwr.github.io/projects/day-and-kirby/
+page: https://pkwr.co/day-and-kirby/
 tags: [project-pages]
 ---
 

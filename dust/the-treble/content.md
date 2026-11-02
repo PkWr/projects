@@ -1,7 +1,7 @@
 ---
 title: The Treble
 type: project-page
-page: https://pkwr.github.io/projects/dust/the-treble/
+page: https://pkwr.co/dust/the-treble/
 tags: [project-pages, dust]
 ---
 

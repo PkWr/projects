@@ -1,7 +1,7 @@
 ---
 title: Going Public
 type: project-page
-page: https://pkwr.github.io/projects/dust/going-public/
+page: https://pkwr.co/dust/going-public/
 tags: [project-pages, dust]
 ---
 

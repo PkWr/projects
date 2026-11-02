@@ -1,7 +1,7 @@
 ---
 title: From the Crypts of Fuchs to the Folds of Schwalbe
 type: project-page
-page: https://pkwr.github.io/projects/schwalbe/
+page: https://pkwr.co/schwalbe/
 tags: [project-pages]
 ---
 

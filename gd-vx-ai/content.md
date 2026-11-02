@@ -1,7 +1,7 @@
 ---
 title: GD v/x AI
 type: project-page
-page: https://pkwr.github.io/projects/gd-vx-ai/
+page: https://pkwr.co/gd-vx-ai/
 tags: [project-pages]
 ---
 

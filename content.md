@@ -1,7 +1,7 @@
 ---
 title: PkWr
 type: project-page
-page: https://pkwr.github.io/projects/
+page: https://pkwr.co/
 tags: [project-pages]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: C90
 type: project-page
-page: https://pkwr.github.io/projects/dust/c90/
+page: https://pkwr.co/dust/c90/
 tags: [project-pages, dust]
 ---
 

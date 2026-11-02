@@ -1,7 +1,7 @@
 ---
 title: Feast
 type: project-page
-page: https://pkwr.github.io/projects/dust/feast/
+page: https://pkwr.co/dust/feast/
 tags: [project-pages, dust]
 ---
 

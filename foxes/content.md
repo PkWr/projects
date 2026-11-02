@@ -1,7 +1,7 @@
 ---
 title: Foxes
 type: project-page
-page: https://pkwr.github.io/projects/foxes/
+page: https://pkwr.co/foxes/
 tags: [project-pages]
 ---
 
