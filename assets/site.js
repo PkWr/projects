@@ -19,6 +19,7 @@
   // Dashboard: https://pkwr.goatcounter.com  -  set to "" to switch analytics off.
   const GOATCOUNTER = "https://pkwr.goatcounter.com/count";
   if (GOATCOUNTER && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) && location.protocol !== "file:") {
+    window.goatcounter = { path: function (p) { return location.host + p; } };
     const gc = document.createElement("script");
     gc.async = true;
     gc.src = "https://gc.zgo.at/count.js";
