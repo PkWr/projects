@@ -10,12 +10,21 @@
 #   Project Pages/dust/<project>/*.md  ->  dust/<project>/content.md
 
 set -e
-VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/2026-PkWr/Projects/Project Pages"
+VAULT="$HOME/Vaults/2026-PkWr/40 Projects/Project Pages"   # moved out of iCloud, 31 Oct 2026
 cd "$(dirname "$0")"
 
 if [ ! -d "$VAULT" ]; then
   echo "Can't find the Obsidian folder:"; echo "  $VAULT"; exit 1
 fi
+
+# The page note is the one marked "type: project-page"; if none is marked, the first .md file.
+# (concrete/ also holds "Concrete kit notes.md" and a spec, which must never become the page.)
+pick_note() {
+  local f
+  f="$(grep -l '^type: project-page' "$1"*.md 2>/dev/null | head -n 1)"
+  [ -n "$f" ] || f="$(ls "$1"*.md 2>/dev/null | head -n 1)"
+  echo "$f"
+}
 
 copied=0
 if [ -f "$VAULT/Home - About.md" ]; then
@@ -25,7 +34,7 @@ for dir in "$VAULT"/*/; do
   name="$(basename "$dir")"
   [ "$name" = "_template" ] && continue
   [ -d "$name" ] || continue                      # only projects that exist on the site
-  note="$(ls "$dir"*.md 2>/dev/null | head -n 1)"
+  note="$(pick_note "$dir")"
   [ -n "$note" ] || continue
   cp "$note" "$name/content.md" && echo "  $name  <- $(basename "$note")" && copied=$((copied+1))
 done
@@ -34,7 +43,7 @@ for dir in "$VAULT"/themes/*/; do
   [ -d "$dir" ] || continue
   name="$(basename "$dir")"
   [ -d "themes/$name" ] || continue
-  note="$(ls "$dir"*.md 2>/dev/null | head -n 1)"
+  note="$(pick_note "$dir")"
   [ -n "$note" ] || continue
   cp "$note" "themes/$name/content.md" && echo "  themes/$name  <- $(basename "$note")" && copied=$((copied+1))
 done
@@ -43,7 +52,7 @@ for dir in "$VAULT"/dust/*/; do
   [ -d "$dir" ] || continue
   name="$(basename "$dir")"
   [ -d "dust/$name" ] || continue
-  note="$(ls "$dir"*.md 2>/dev/null | head -n 1)"
+  note="$(pick_note "$dir")"
   [ -n "$note" ] || continue
   cp "$note" "dust/$name/content.md" && echo "  dust/$name  <- $(basename "$note")" && copied=$((copied+1))
 done

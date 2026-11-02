@@ -1,7 +1,7 @@
 ---
 title: Form
 type: project-page
-page: https://pkwr.github.io/projects/form/
+page: https://pkwr.co/form/
 tags: [project-pages]
 ---
 
