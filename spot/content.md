@@ -83,6 +83,6 @@ Requirements as published by Adobe (After Effects 26, 2026), Derivative (TouchDe
 
 <!-- `file`: description for screen readers *caption shown on the image* -->
 
-- `images/01.jpg`: Spot Room in the Igloo Immersive Suite: a pink, yellow and blue duotone of a crowd fills the curved wall, with a pale 3D form in front and pixelated patches *Spot Room, Igloo Immersive Suite, 15 October 2026*
-- `images/02.jpg`: The same wall a moment later, the 3D form now partly blue and the pixelation shifted *Spot Room, Igloo Immersive Suite*
-- `images/03.jpg`: The Igloo wall in orange, blue and violet, with a striped 3D form and a coarse pixel grid on the right *Spot Room, Igloo Immersive Suite*
+- `images/01.jpg`: Spot Room in the Igloo Immersive Suite: a pink, yellow and blue duotone of a crowd fills the curved wall, with a pale 3D form in front and pixelated patches *Spot Room, Igloo Workshop, 3 November 2026*
+- `images/02.jpg`: The same wall a moment later, the 3D form now partly blue and the pixelation shifted *Spot Room, Igloo Workshop, 3 November 2026*
+- `images/03.jpg`: The Igloo wall in orange, blue and violet, with a striped 3D form and a coarse pixel grid on the right *Spot Room, Igloo Workshop, 3 November 2026*
