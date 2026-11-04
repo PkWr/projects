@@ -5,7 +5,7 @@
 
   Slide types:
     { "src": "images/01.jpg", "alt": "...", "caption": "...", "fit": "contain" }   image (fills the frame by default; "contain" shows it whole)
-    { "type": "video", "src": "images/clip.mp4", "poster": "...", "caption": "..." }
+    { "type": "video", "src": "images/clip.mp4", "poster": "...", "caption": "...", "once": true }   video ("once" plays it once, then moves on; otherwise it loops and stays)
     { "type": "embed", "src": "https://foxes.pkwr.co", "caption": "..." }     live piece in an iframe
 
   Home page: set "home": true and "pool": true, and list projects in "menu".
@@ -123,6 +123,11 @@
       } else if (type === "video") {
         const v = el("video", { muted: "", loop: "", playsinline: "", preload: "metadata" });
         v.muted = true;
+        // "once": true plays the clip a single time, then moves to the next slide (if the slideshow is playing)
+        if (s.once) {
+          v.loop = false;
+          v.addEventListener("ended", () => { if (playing && current === i) { stage.classList.remove("quick"); show(current + 1); } });
+        }
         if (s.poster) v.poster = s.poster;
         v.src = s.src;
         v.onerror = onMissing;
@@ -317,7 +322,7 @@
         s.classList.toggle("is-active", on);
         s.setAttribute("aria-hidden", on ? "false" : "true");
         const v = s.querySelector("video");
-        if (v) on ? v.play().catch(() => {}) : v.pause();
+        if (v) { if (on) { if (data.slides[idx].once) v.currentTime = 0; v.play().catch(() => {}); } else v.pause(); }
         // load embeds on demand, unload when away to save CPU
         if (s.dataset.embed) {
           if (on && !s.querySelector("iframe")) {
