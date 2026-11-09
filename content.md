@@ -37,7 +37,7 @@ Designer, educator and maker, Sheffield
 
 Patrick Walker is a designer, educator and maker based in Sheffield. He founded the design studio dust, and leads the BA (Hons) Graphic Design course at Sheffield Hallam University.
 
-His practice moves between typography, print and code (hand-built early on, more recently built with AI): printmaking badly on purpose, setting the parameters for code to explore outcomes. Recent work has moved off the page into live installation, using machinery, cameras and real-time projection.
+His practice moves between typography, print and code: printmaking badly on purpose, setting the parameters for code to explore outcomes. Recent work has moved off the page into live installation, using machinery, cameras and real-time projection.
 
 ## Elsewhere
 
